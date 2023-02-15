@@ -1,6 +1,16 @@
-.profile{
-    display: flex;
-    width: calc(100vw - 400px);
-    align-items: center;
-    margin: 40px 0 50px;
+.profile {
+  display: flex;
+  width: calc(100vw - 400px);
+  align-items: center;
+  margin: 40px 0 50px;
 }
+@media (max-width: 1024px) {
+  .profile {
+    width: calc(100vw - 200px);
+  }
+}
+@media (max-width: 800px) {
+    .profile {
+      width: calc(100vw - 100px);
+    }
+  }

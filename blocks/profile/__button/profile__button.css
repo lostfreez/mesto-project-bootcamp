@@ -7,3 +7,9 @@
   justify-content: center;
   margin-left: auto;
 }
+@media (max-width: 550px) {
+  .profile__button {
+    margin: 36px 0 0;
+    min-width: 282px;
+  }
+}

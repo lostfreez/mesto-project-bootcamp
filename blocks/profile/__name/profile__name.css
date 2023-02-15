@@ -5,3 +5,15 @@
   margin: 0;
   min-width: 295px;
 }
+@media (max-width: 710px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+    min-width: 189px;
+  }
+}
+@media (max-width: 550px) {
+  .profile__name {
+    margin: 22px 0 14px;
+  }
+}

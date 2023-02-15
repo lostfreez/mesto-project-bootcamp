@@ -1,0 +1,16 @@
+.photo-grid{
+display: grid;
+  grid-template-columns: repeat(3, 282px);
+  gap: 20px 17px;
+  max-width: 880px;
+}
+@media (max-width: 880px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 282px);
+    }
+  }
+  @media (max-width: 600px) {
+    .photo-grid {
+        grid-template-columns: repeat(1, 282px);
+    }
+  }

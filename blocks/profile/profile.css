@@ -10,7 +10,18 @@
   }
 }
 @media (max-width: 800px) {
-    .profile {
-      width: calc(100vw - 100px);
-    }
+  .profile {
+    width: calc(100vw - 100px);
   }
+}
+@media (max-width: 620px) {
+  .profile {
+    width: calc(100vw - 50px);
+  }
+}
+@media (max-width: 550px) {
+  .profile {
+    flex-direction: column;
+  }
+}
+

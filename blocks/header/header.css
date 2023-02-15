@@ -1,5 +1,5 @@
 .header {
-  width: calc(100% - 400px);
+  width: calc(100vw - 400px);
   margin-top: 45px;
   padding-bottom: 40px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
@@ -12,5 +12,10 @@
 @media (max-width: 800px) {
   .header {
     width: calc(100vw - 100px);
+  }
+}
+@media (max-width: 620px) {
+  .header {
+    width: calc(100vw - 50px);
   }
 }

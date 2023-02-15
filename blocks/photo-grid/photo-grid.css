@@ -4,12 +4,12 @@ display: grid;
   gap: 20px 17px;
   max-width: 880px;
 }
-@media (max-width: 880px) {
+@media (max-width: 895px) {
     .photo-grid {
         grid-template-columns: repeat(2, 282px);
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 610px) {
     .photo-grid {
         grid-template-columns: repeat(1, 282px);
     }

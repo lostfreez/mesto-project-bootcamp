@@ -10,7 +10,7 @@
     line-height: 17px;
   }
 }
-@media (max-width: 550px) {
+@media (max-width: 610px) {
   .profile__job {
     margin: 0;
   }

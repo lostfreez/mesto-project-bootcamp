@@ -12,9 +12,9 @@
   opacity: 0.6;
   cursor: pointer;
 }
-@media (max-width: 550px) {
+@media (max-width: 610px) {
   .profile__button {
-    margin: 36px 0 0;
+    margin: 16px 0 0;
     min-width: 282px;
   }
 }

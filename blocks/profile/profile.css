@@ -4,22 +4,22 @@
   align-items: center;
   margin: 40px 0 50px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1065px) {
   .profile {
     width: calc(100vw - 200px);
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .profile {
     width: calc(100vw - 100px);
   }
 }
-@media (max-width: 620px) {
+@media (max-width: 760px) {
   .profile {
     width: calc(100vw - 50px);
   }
 }
-@media (max-width: 550px) {
+@media (max-width: 610px) {
   .profile {
     flex-direction: column;
   }

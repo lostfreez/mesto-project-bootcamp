@@ -12,5 +12,6 @@ display: grid;
   @media (max-width: 610px) {
     .photo-grid {
         grid-template-columns: repeat(1, 282px);
+        gap: 11px 17px;
     }
   }

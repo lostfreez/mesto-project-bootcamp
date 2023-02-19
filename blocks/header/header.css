@@ -19,3 +19,9 @@
     width: calc(100vw - 50px);
   }
 }
+@media (max-width: 610px) {
+  .header {
+    margin-top: 28px;
+    padding-bottom: 27px;
+  }
+}

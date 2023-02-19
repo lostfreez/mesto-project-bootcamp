@@ -1,7 +1,7 @@
 .photo-grid{
 display: grid;
   grid-template-columns: repeat(3, 282px);
-  gap: 20px 17px;
+  gap: 23px 17px;
   max-width: 880px;
 }
 @media (max-width: 910px) {

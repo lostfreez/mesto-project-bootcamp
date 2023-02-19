@@ -1,9 +1,15 @@
 .photo-grid__foot {
   display: flex;
   justify-content: space-between;
-  margin: 25px 20px 30px;
+  margin: 16px 20px 30px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   align-items: center;
+}
+
+@media (max-width: 610px) {
+  .photo-grid__foot {
+    margin: 25px 20px 30px;
+  }
 }

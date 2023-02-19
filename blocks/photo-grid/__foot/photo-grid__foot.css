@@ -2,9 +2,6 @@
   display: flex;
   justify-content: space-between;
   margin: 16px 20px 30px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   align-items: center;
 }
 

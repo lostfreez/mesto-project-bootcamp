@@ -1,4 +1,4 @@
-.popup-window__save {
+.popup__save {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
@@ -12,12 +12,12 @@
   align-items: center;
   transition: linear 0.2s;
 }
-.popup-window__save:hover{
+.popup__save:hover{
     opacity: 0.8;
     cursor: pointer;
 }
 @media (max-width: 550px) {
-  .popup-window__save {
+  .popup__save {
     margin: 45px 22px 0;
     width: 238px;
     height: 46px;

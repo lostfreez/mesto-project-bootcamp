@@ -1,4 +1,4 @@
-.popup-window {
+.popup__window {
   position: fixed;
   width: 430px;
   height: 330px;
@@ -14,7 +14,7 @@
   z-index: 1;
 }
 @media (max-width: 550px) {
-  .popup-window {
+  .popup__window {
     width: 282px;
     height: 322px;
   }

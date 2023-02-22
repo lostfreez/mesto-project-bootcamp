@@ -12,6 +12,20 @@
       <header class="header">
         <img src="./images/mesto-logo.svg" class="header__logo" alt="Логотип" />
       </header>
+      <section class="popup-window popup-window_opened">
+        <p class="popup-window__title">Редактировать&nbsp;профиль</p>
+        <div class="popup-window__edit-container">
+          <p class="popup-window__edit">Жак-Ив Кусто</p>
+          <p class="popup-window__edit">Исследователь океана</p>
+        </div>
+        <p class="popup-window__save">Сохранить</p>
+        <img
+          src="./images/CloseIcon.svg"
+          alt="Крестик"
+          class="popup-window__close"
+        />
+      </section>
+      <section class="popup-overlay popup-overlay_opened"></section>
       <main class="main">
         <section class="profile">
           <img
@@ -23,111 +37,81 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
           </div>
-          <div class="profile__edit">
-            <img src="./images/edit.svg" alt="Содержимое кнопки редактировать карандаш">
-          </div>
+          <button class="profile__edit" type="menu"></button>
           <div class="profile__button">
             <img src="./images/button.svg" alt="Содержимое кнопки крест" />
           </div>
         </section>
         <section class="photo-grid">
-          <div class="photo-grid__card">
-            <img
-              src="./images/img1.png"
-              alt="Карачаевск монастырь"
-              class="photo-grid__image"
-            />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Карачаевск</p>
+          <ul class="photo-grid__list">
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like photo-grid__like_active"
+                src="./images/img1.png"
+                alt="Карачаевск монастырь"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
-          <div class="photo-grid__card">
-            <img
-              src="./images/img2.png"
-              alt="Холм в пустыне"
-              class="photo-grid__image"
-            />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Гора Эльбрус</p>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Карачаевск</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like"
+                src="./images/img2.png"
+                alt="Холм в пустыне"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
-          <div class="photo-grid__card">
-            <img src="./images/img3.png" alt="Гора" class="photo-grid__image" />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Домбай</p>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Гора Эльбрус</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like"
+                src="./images/img3.png"
+                alt="Гора"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
-          <div class="photo-grid__card">
-            <img
-              src="./images/img2.png"
-              alt="Холм в пустыне"
-              class="photo-grid__image"
-            />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Гора Эльбрус</p>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Домбай</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like"
+                src="./images/img2.png"
+                alt="Холм в пустыне"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
-          <div class="photo-grid__card">
-            <img src="./images/img3.png" alt="Гора" class="photo-grid__image" />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Домбай</p>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Гора Эльбрус</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like"
+                src="./images/img3.png"
+                alt="Гора"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
-          <div class="photo-grid__card">
-            <img
-              src="./images/img1.png"
-              alt="Карачаевск монастырь"
-              class="photo-grid__image"
-            />
-            <div class="photo-grid__foot">
-              <p class="photo-grid__city">Карачаево-Черкеск</p>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Домбай</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+            <li class="photo-grid__card">
               <img
-                src="./images/likeheart.svg"
-                alt="Сердце"
-                class="photo-grid__like"
+                src="./images/img1.png"
+                alt="Карачаевск монастырь"
+                class="photo-grid__image"
               />
-            </div>
-          </div>
+              <div class="photo-grid__foot">
+                <h2 class="photo-grid__city">Карачаево-Черкеск</h2>
+                <button class="photo-grid__like "></button>
+              </div>
+            </li>
+          </ul>
         </section>
-        <section class="popup-window popup-window_opened">
-          <p class="popup-window__title">Редактировать&nbsp;профиль</p>
-          <div class="popup-window__edit-container">
-            <p class="popup-window__edit">Жак-Ив Кусто</p>
-            <p class="popup-window__edit">Исследователь океана</p>
-          </div>
-          <p class="popup-window__save">Сохранить</p>
-          <img
-            src="./images/CloseIcon.svg"
-            alt="Крестик"
-            class="popup-window__close"
-          />
-        </section>
-        <section class="popup-overlay popup-overlay_opened"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>

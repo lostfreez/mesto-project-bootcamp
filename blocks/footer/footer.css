@@ -1,25 +1,17 @@
 .footer {
   display: flex;
-  width: calc(100vw - 400px);
+  max-width: 880px;
   margin: 63px 0 60px;
+  width: 100%;
 }
-@media (max-width: 1065px) {
+@media (max-width: 910px) {
   .footer {
-    width: calc(100vw - 200px);
-  }
-}
-@media (max-width: 860px) {
-  .footer {
-    width: calc(100vw - 100px);
-  }
-}
-@media (max-width: 760px) {
-  .footer {
-    width: calc(100vw - 50px);
+    max-width: 581px;
   }
 }
 @media (max-width: 610px) {
   .footer {
     margin: 45px 0 36px;
+    max-width: 282px;
   }
 }

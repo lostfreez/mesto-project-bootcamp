@@ -11,7 +11,7 @@ function openProfile() {
   modal.classList.toggle("popup__window_opened");
 }
 //переменные для редактирование профиля
-const formElement = document.querySelector(".popup__edit-container");
+const formEditContain = document.getElementById("editContain");
 const nameInput = document.getElementById("nameInput");
 const jobInput = document.getElementById("jobInput");
 //функция для сохраненния внесенных изменений и скрытия попапа
@@ -23,9 +23,9 @@ function handleFormSubmit(evt) {
   const jobOutput = document.querySelector(".profile__job");
   nameOutput.textContent = nameValue;
   jobOutput.textContent = jobValue;
-  modal.classList.toggle("popup_opened");
+  openProfile();
 }
-formElement.addEventListener("submit", handleFormSubmit);
+formEditContain.addEventListener("submit", handleFormSubmit);
 //массив с карточками
 const initialCards = [
   {
@@ -74,3 +74,19 @@ function addCardForm(){
   popup.classList.toggle("popup_opened");
   cardForm.classList.toggle("popup__window_opened");
 };
+//переменные для добавления новой карточки
+const namePlaceInput = document.getElementById("newPlace");
+const urlPlaceInput = document.getElementById("urlPlace");
+const formAddCard = document.getElementById("addCard");
+//функция добавления новой карточки
+function addCard(evt) {
+  evt.preventDefault();
+  const nameValue = namePlaceInput.value;
+  const placeValue = urlPlaceInput.value;
+  const cardContent = card.content.cloneNode(true);
+  cardContent.querySelector(".photo-grid__image").src = placeValue;
+  cardContent.querySelector(".photo-grid__city").textContent = nameValue;
+  cardContainer.append(cardContent);
+  addCardForm();
+};
+formAddCard.addEventListener("submit", addCard);

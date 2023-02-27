@@ -57,10 +57,11 @@ const initialCards = [
 const card = document.querySelector("#card");
 const cardContainer = document.querySelector(".photo-grid__list");
 //функция клонирующая карточки с изменением содержимого из массива
-initialCards.forEach(function(item) {
+initialCards.forEach(function (item) {
   const cardContent = card.content.cloneNode(true);
   cardContent.querySelector(".photo-grid__image").src = item.link;
   cardContent.querySelector(".photo-grid__city").textContent = item.name;
+  addLike(cardContent);
   cardContainer.append(cardContent);
 });
 //переменные для кнопки открытия формы добавления карточек
@@ -70,10 +71,10 @@ const clsButtonCard = document.getElementById("cardForm__close");
 addCardButton.addEventListener("click", addCardForm);
 clsButtonCard.addEventListener("click", addCardForm);
 //функция открытия формы добавления карточек
-function addCardForm(){
+function addCardForm() {
   popup.classList.toggle("popup_opened");
   cardForm.classList.toggle("popup__window_opened");
-};
+}
 //переменные для добавления новой карточки
 const namePlaceInput = document.getElementById("newPlace");
 const urlPlaceInput = document.getElementById("urlPlace");
@@ -86,7 +87,15 @@ function addCard(evt) {
   const cardContent = card.content.cloneNode(true);
   cardContent.querySelector(".photo-grid__image").src = placeValue;
   cardContent.querySelector(".photo-grid__city").textContent = nameValue;
+  addLike(cardContent);
   cardContainer.append(cardContent);
   addCardForm();
-};
+}
 formAddCard.addEventListener("submit", addCard);
+//функция добавления лайка на карточку
+function addLike(cardContent) {
+  const likeButton = cardContent.querySelector(".photo-grid__like");
+  likeButton.addEventListener("click", function () {
+    likeButton.classList.toggle("photo-grid__like_active");
+  });
+};

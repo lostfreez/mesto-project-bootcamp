@@ -12,15 +12,24 @@
       <header class="header">
         <img src="./images/mesto-logo.svg" class="header__logo" alt="Логотип" />
       </header>
-      <div  class="popup popup_opened">
-        <div class="popup__window">
+      <div  class="popup">
+        <div class="popup__window" id="editProfile">
           <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
-          <form class="popup__edit-container">
-            <input class="popup__edit" type="text" placeholder="Жак-Ив Кусто"></input>
-            <input class="popup__edit" type="text" placeholder="Исследователь океана"></input>
+          <form class="popup__edit-container" action="">
+            <input class="popup__edit" id="nameInput" type="text" value="Жак-Ив Кусто"></input>
+            <input class="popup__edit" id="jobInput" type="text" value="Исследователь океана"></input>
             <button type="submit" class="popup__save">Сохранить</button>
           </form>
-          <button type="button" class="popup__close"></button>
+          <button type="button" class="popup__close" id="editProfile__close"></button>
+        </div>
+        <div class="popup__window" id="cardForm">
+          <h3 class="popup__title">Новое&nbsp;место</h3>
+          <form class="popup__edit-container" action="">
+            <input class="popup__edit" id="newPlace" type="text" placeholder="Новое место"></input>
+            <input class="popup__edit" id="urlPlace" type="text" placeholder="Ссылка на картинку"></input>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </form>
+          <button type="button" class="popup__close" id="cardForm__close"></button>
         </div>
       </div>
       <main class="main">
@@ -35,12 +44,13 @@
             <p class="profile__job">Исследователь океана</p>
           </div>
           <button class="profile__edit" type="menu"></button>
-          <div class="profile__button">
+          <button class="profile__button" type="button"> 
             <img src="./images/button.svg" alt="Содержимое кнопки крест" />
-          </div>
+          </button>
         </section>
         <section class="photo-grid">
           <ul class="photo-grid__list">
+            <template id="card">
             <li class="photo-grid__card">
               <img
                 src="./images/img1.png"
@@ -52,61 +62,7 @@
                 <button class="photo-grid__like"></button>
               </div>
             </li>
-            <li class="photo-grid__card">
-              <img
-                src="./images/img2.png"
-                alt="Холм в пустыне"
-                class="photo-grid__image"
-              />
-              <div class="photo-grid__foot">
-                <h2 class="photo-grid__city">Гора Эльбрус</h2>
-                <button class="photo-grid__like"></button>
-              </div>
-            </li>
-            <li class="photo-grid__card">
-              <img
-                src="./images/img3.png"
-                alt="Гора"
-                class="photo-grid__image"
-              />
-              <div class="photo-grid__foot">
-                <h2 class="photo-grid__city">Домбай</h2>
-                <button class="photo-grid__like"></button>
-              </div>
-            </li>
-            <li class="photo-grid__card">
-              <img
-                src="./images/img2.png"
-                alt="Холм в пустыне"
-                class="photo-grid__image"
-              />
-              <div class="photo-grid__foot">
-                <h2 class="photo-grid__city">Гора Эльбрус</h2>
-                <button class="photo-grid__like"></button>
-              </div>
-            </li>
-            <li class="photo-grid__card">
-              <img
-                src="./images/img3.png"
-                alt="Гора"
-                class="photo-grid__image"
-              />
-              <div class="photo-grid__foot">
-                <h2 class="photo-grid__city">Домбай</h2>
-                <button class="photo-grid__like"></button>
-              </div>
-            </li>
-            <li class="photo-grid__card">
-              <img
-                src="./images/img1.png"
-                alt="Карачаевск монастырь"
-                class="photo-grid__image"
-              />
-              <div class="photo-grid__foot">
-                <h2 class="photo-grid__city">Карачаево-Черкеск</h2>
-                <button class="photo-grid__like"></button>
-              </div>
-            </li>
+          </template>
           </ul>
         </section>
       </main>

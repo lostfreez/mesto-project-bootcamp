@@ -56,11 +56,13 @@ const initialCards = [
 //переменные template для клонирования карточки
 const card = document.querySelector("#card");
 const cardContainer = document.querySelector(".photo-grid__list");
+
 //функция клонирующая карточки с изменением содержимого из массива
 initialCards.forEach(function (item) {
   const cardContent = card.content.cloneNode(true);
   cardContent.querySelector(".photo-grid__image").src = item.link;
   cardContent.querySelector(".photo-grid__city").textContent = item.name;
+  deleteCard(cardContent);
   addLike(cardContent);
   cardContainer.append(cardContent);
 });
@@ -87,6 +89,7 @@ function addCard(evt) {
   const cardContent = card.content.cloneNode(true);
   cardContent.querySelector(".photo-grid__image").src = placeValue;
   cardContent.querySelector(".photo-grid__city").textContent = nameValue;
+  deleteCard(cardContent);
   addLike(cardContent);
   cardContainer.append(cardContent);
   addCardForm();
@@ -97,5 +100,12 @@ function addLike(cardContent) {
   const likeButton = cardContent.querySelector(".photo-grid__like");
   likeButton.addEventListener("click", function () {
     likeButton.classList.toggle("photo-grid__like_active");
+  });
+};
+//функция удаления карточки
+function deleteCard(cardContent){
+  const deleteButton = cardContent.querySelector(".photo-grid__delete");
+  deleteButton.addEventListener("click", function () {
+    deleteButton.parentElement.remove();
   });
 };

@@ -1,4 +1,4 @@
-.popup__image-close{
+.photo-grid__image-close{
     background-image: url(../../../images/CloseIcon.svg);
     width: 32px;
     height: 32px;
@@ -12,12 +12,12 @@
     top: -40px;
     background-size: cover;
 }
-.popup__image-close:hover{
+.photo-grid__image-close:hover{
     opacity: 0.5;
     cursor: pointer;
 }
 @media (max-width: 695px) {
-    .popup__image-close {
+    .photo-grid__image-close {
         width: 20px;
         height: 20px;
         right: 0;

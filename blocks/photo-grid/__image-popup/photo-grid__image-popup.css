@@ -1,21 +1,21 @@
-.popup__image{
+.photo-grid__image-popup{
     max-width: 816px;
     max-height: 600px;
 }
 @media (max-width: 920px) {
-    .popup__image {
+    .photo-grid__image-popup {
         max-width: 600px;
         max-height: 575px;
     }
   }
 @media (max-width: 710px) {
-    .popup__image {
+    .photo-grid__image-popup {
       max-width: 465px;
       max-height: 575px;
     }
   }
   @media (max-width: 560px) {
-    .popup__image {
+    .photo-grid__image-popup {
         max-width: 300px;
         max-height: 380px;
     }

@@ -2,6 +2,7 @@
     max-width: 816px;
     max-height: 600px;
 }
+
 @media (max-width: 920px) {
     .photo-grid__image-popup {
         max-width: 600px;
@@ -18,5 +19,11 @@
     .photo-grid__image-popup {
         max-width: 300px;
         max-height: 380px;
+    }
+  }
+  @media (max-height: 450px) {
+    .photo-grid__image-popup {
+        max-width: 400px;
+        max-height: 575px;
     }
   }

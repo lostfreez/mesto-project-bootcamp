@@ -1,5 +1,5 @@
 .popup__window {
-  display: none;
+  display: flex;
   position: fixed;
   max-width: 430px;
   min-height: 330px;
@@ -9,6 +9,9 @@
   color: black;
   flex-direction: column;
   z-index: 1;
+  transition: all 0.5s ease-out;
+  opacity: 0;
+  visibility: hidden;
 }
 @media (max-width: 550px) {
   .popup__window {

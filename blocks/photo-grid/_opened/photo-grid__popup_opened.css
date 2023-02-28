@@ -1,8 +1,5 @@
-.photo-grid__popup_opened{
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+.photo-grid__popup_opened {
+  visibility: visible;
+  transition: all 1s ease-out;
+  opacity: 1;
 }

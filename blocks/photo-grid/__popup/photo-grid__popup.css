@@ -1,4 +1,10 @@
-.photo-grid__popup{
-    display: none;
-    position: relative;
+.photo-grid__popup {
+  position: fixed;
+  transition: all 0.5s ease-out;
+  opacity: 0;
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }

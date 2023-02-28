@@ -31,6 +31,15 @@
           </form>
           <button type="button" class="popup__close" id="cardForm__close"></button>
         </div>
+      <div class="popup__cards">
+        <template id="popup__card">
+          <div class="popup__card">
+            <button class="popup__image-close"></button>
+            <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg">
+            <p class="popup__place-name">Карачаевск</p>
+          </div>
+        </template>
+      </div>
       </div>
       <main class="main">
         <section class="profile">
@@ -55,7 +64,6 @@
               <button class="photo-grid__delete"></button>
               <img
                 src="./images/img1.png"
-                alt="Карачаевск монастырь"
                 class="photo-grid__image"
               />
               <div class="photo-grid__foot">

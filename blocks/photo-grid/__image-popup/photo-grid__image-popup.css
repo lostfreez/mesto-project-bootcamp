@@ -1,29 +1,4 @@
 .photo-grid__image-popup{
-    max-width: 816px;
-    max-height: 600px;
+    max-width: 75vw;
+    max-height: 75vh;
 }
-
-@media (max-width: 920px) {
-    .photo-grid__image-popup {
-        max-width: 600px;
-        max-height: 575px;
-    }
-  }
-@media (max-width: 710px) {
-    .photo-grid__image-popup {
-      max-width: 465px;
-      max-height: 575px;
-    }
-  }
-  @media (max-width: 560px) {
-    .photo-grid__image-popup {
-        max-width: 300px;
-        max-height: 380px;
-    }
-  }
-  @media (max-height: 450px) {
-    .photo-grid__image-popup {
-        max-width: 400px;
-        max-height: 575px;
-    }
-  }

@@ -100,6 +100,8 @@ function addCard(evt) {
   addClosePhoto(cardContent);
   cardContainer.append(cardContent);
   openCardForm();
+  namePlaceInput.value = "";
+  urlPlaceInput.value = "";
 }
 formAddCard.addEventListener("submit", addCard);
 //функция добавления лайка на карточку
@@ -121,7 +123,7 @@ function togglePopup(event) {
   const card = event.target.closest('.photo-grid__card');
   const popupImage = card.querySelector('.photo-grid__popup');
   popupImage.classList.toggle('photo-grid__popup_opened');
-  popup.classList.toggle("popup_opened");
+  popup.classList.toggle("popup_background_opened");
 };
 //функция привязки клика по изображению к попапу
 function addButtonPhoto(cardContent) {

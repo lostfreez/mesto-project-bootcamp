@@ -35,3 +35,4 @@
 @import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_opened/popup__window_opened.css);
+@import url(../blocks/popup/_opened/popup_background_opened.css);

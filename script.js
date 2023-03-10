@@ -5,11 +5,7 @@ const popup = document.querySelector(".popup");
 const modal = document.getElementById("editProfile");
 edtButton.addEventListener("click", openProfile);
 clsButton.addEventListener("click", openProfile);
-//функция открытия профиля
-function openProfile() {
-  popup.classList.toggle("popup_opened");
-  modal.classList.toggle("popup__window_opened");
-}
+
 //переменные для редактирование профиля
 const formEditContain = document.getElementById("editContain");
 const nameInput = document.getElementById("nameInput");
@@ -26,6 +22,16 @@ function handleFormSubmit(evt) {
   openProfile();
 }
 formEditContain.addEventListener("submit", handleFormSubmit);
+//функция открытия профиля
+function openProfile() {
+  popup.classList.toggle("popup_opened");
+  modal.classList.toggle("popup__window_opened");
+  const nameOutput = document.querySelector(".profile__name");
+  const jobOutput = document.querySelector(".profile__job");
+  nameInput.value = nameOutput.textContent;
+  jobInput.value = jobOutput.textContent;
+
+}
 //массив с карточками
 const initialCards = [
   {

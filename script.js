@@ -104,7 +104,7 @@ function addCard(evt) {
   deleteCard(cardContent);
   addLike(cardContent);
   addClosePhoto(cardContent);
-  cardContainer.append(cardContent);
+  cardContainer.prepend(cardContent);
   openCardForm();
   namePlaceInput.value = "";
   urlPlaceInput.value = "";

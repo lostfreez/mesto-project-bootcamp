@@ -2,8 +2,8 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  top: -12%;
-  right: -9%;
+  top: -40px;
+  right: -40px;
   transition: linear 0.3s;
   background-image: url(../../../images/CloseIcon.svg);
   border: none;
@@ -20,7 +20,7 @@
   .popup__close {
     width: 20px;
     height: 20px;
-    top: -10%;
-    right: 0%;
+    top: -30px;
+    right: 0;
   }
 }

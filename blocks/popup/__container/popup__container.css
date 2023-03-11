@@ -1,4 +1,4 @@
-.popup__window {
+.popup__container {
   display: flex;
   position: fixed;
   max-width: 430px;
@@ -14,7 +14,7 @@
   visibility: hidden;
 }
 @media (max-width: 550px) {
-  .popup__window {
+  .popup__container {
     max-width: 282px;
     min-height: 310px;
   }

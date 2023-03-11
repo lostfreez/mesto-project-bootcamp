@@ -12,34 +12,6 @@
       <header class="header">
         <img src="./images/mesto-logo.svg" class="header__logo" alt="Логотип" />
       </header>
-      <div class="popup">
-        <div class="popup__window" id="editProfile">
-          <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
-          <form class="popup__edit-container" id="editContain" action="">
-            <input class="popup__edit" id="nameInput" type="text"></input>
-            <input class="popup__edit" id="jobInput" type="text"></input>
-            <button type="submit" class="popup__save">Сохранить</button>
-          </form>
-          <button
-            type="button"
-            class="popup__close"
-            id="editProfile__close"
-          ></button>
-        </div>
-        <div class="popup__window" id="cardForm">
-          <h3 class="popup__title">Новое&nbsp;место</h3>
-          <form class="popup__edit-container" id="addCard" action="">
-            <input class="popup__edit" id="newPlace" type="text" placeholder="Новое место"></input>
-            <input class="popup__edit" id="urlPlace" type="text" placeholder="Ссылка на картинку"></input>
-            <button type="submit" class="popup__save">Сохранить</button>
-          </form>
-          <button
-            type="button"
-            class="popup__close"
-            id="cardForm__close"
-          ></button>
-        </div>
-      </div>
       <main class="main">
         <section class="profile">
           <img
@@ -60,14 +32,6 @@
           <ul class="photo-grid__list">
             <template id="card">
               <li class="photo-grid__card">
-                <div class="photo-grid__popup">
-                  <button class="photo-grid__image-close"></button>
-                  <img
-                    class="photo-grid__image-popup"
-                    src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-                  />
-                  <p class="photo-grid__place-name">Карачаевск</p>
-                </div>
                 <button class="photo-grid__delete"></button>
                 <img src="./images/img1.png" class="photo-grid__image" />
                 <div class="photo-grid__foot">
@@ -82,6 +46,46 @@
       <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
+      <div class="popup">
+        <div class="popup__container" id="editProfile">
+          <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
+          <form class="popup__form" id="editContainer" action="">
+            <input class="popup__edit" id="nameInput" type="text" placeholder="Имя"></input>
+            <input class="popup__edit" id="jobInput" type="text" placeholder="О себе"></input>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </form>
+          <button
+            type="button"
+            class="popup__close"
+            id="editProfile__close"
+          ></button>
+        </div>
+        <div class="popup__container" id="cardForm">
+          <h3 class="popup__title">Новое&nbsp;место</h3>
+          <form class="popup__form" id="addCard" action="">
+            <input class="popup__edit" id="newPlace" type="text" placeholder="Новое место"></input>
+            <input class="popup__edit" id="urlPlace" type="text" placeholder="Ссылка на картинку"></input>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </form>
+          <button
+            type="button"
+            class="popup__close"
+            id="cardForm__close"
+          ></button>
+        </div>
+        <div class="popup__container" id="cardPopupContainer">
+          <template id="popup__card">
+          <div class="popup__card">
+            <button class="popup__close"></button>
+            <img
+              class="popup__image"
+              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+            />
+            <p class="popup__place-name">Карачаевск</p>
+          </div>
+        </template>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

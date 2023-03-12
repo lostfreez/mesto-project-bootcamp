@@ -1,8 +1,10 @@
 .popup__save {
+  border: 1px solid #000000;
+  border-radius: 2px;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  margin: 48px 36px 0;
+  margin: 5px 36px 0;
   color: white;
   background: black;
   width: 358px;
@@ -18,7 +20,7 @@
 }
 @media (max-width: 550px) {
   .popup__save {
-    margin: 34px 22px 0;
+    margin: 0 22px 0;
     width: 238px;
     height: 46px;
     font-size: 14px;

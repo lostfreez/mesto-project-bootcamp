@@ -5,8 +5,8 @@
   max-width: 358px;
   font-size: 14px;
   line-height: 17px;
-  margin: 27px 36px 0px;
-  padding-bottom: 8px;
+  margin: 0 36px 0;
+  padding-bottom: 13px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .popup__edit:last-child{
@@ -14,7 +14,7 @@
 }
 @media (max-width: 550px) {
     .popup__edit {
-        margin: 14px 22px 12px;
+        margin: 0 22px 0;
         max-width: 238px;
     }
   }

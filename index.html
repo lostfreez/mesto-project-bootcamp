@@ -49,10 +49,30 @@
       <div class="popup">
         <div class="popup__container" id="editProfile">
           <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
-          <form class="popup__form" id="editContainer" action="">
-            <input class="popup__edit" id="nameInput" type="text" placeholder="Имя"></input>
-            <input class="popup__edit" id="jobInput" type="text" placeholder="О себе"></input>
-            <button type="submit" class="popup__save">Сохранить</button>
+          <form class="popup__form" id="editContainer" action="" novalidate>
+            <input
+              class="popup__edit"
+              id="nameInput"
+              type="text"
+              placeholder="Имя"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <p class="popup__error-container"></p>
+            <input
+              class="popup__edit"
+              id="jobInput"
+              type="text"
+              placeholder="О себе"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <p class="popup__error-container"></p>
+            <button type="submit" id="save__profile" class="popup__save">
+              Сохранить
+            </button>
           </form>
           <button
             type="button"
@@ -63,9 +83,25 @@
         <div class="popup__container" id="cardForm">
           <h3 class="popup__title">Новое&nbsp;место</h3>
           <form class="popup__form" id="addCard" action="">
-            <input class="popup__edit" id="newPlace" type="text" placeholder="Новое место"></input>
-            <input class="popup__edit" id="urlPlace" type="text" placeholder="Ссылка на картинку"></input>
-            <button type="submit" class="popup__save">Сохранить</button>
+            <input
+              class="popup__edit"
+              id="newPlace"
+              type="text"
+              placeholder="Новое место"
+              required
+              minlength="2"
+              maxlength="30"
+            />
+            <p class="popup__error-container"></p>
+            <input
+              class="popup__edit"
+              id="urlPlace"
+              type="url"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <p class="popup__error-container"></p>
+            <button type="submit" class="popup__save">Создать</button>
           </form>
           <button
             type="button"
@@ -75,15 +111,15 @@
         </div>
         <div class="popup__container" id="cardPopupContainer">
           <template id="popup__card">
-          <div class="popup__card">
-            <button class="popup__close"></button>
-            <img
-              class="popup__image"
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-            />
-            <p class="popup__place-name">Карачаевск</p>
-          </div>
-        </template>
+            <div class="popup__card">
+              <button class="popup__close"></button>
+              <img
+                class="popup__image"
+                src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+              />
+              <p class="popup__place-name">Карачаевск</p>
+            </div>
+          </template>
         </div>
       </div>
     </div>

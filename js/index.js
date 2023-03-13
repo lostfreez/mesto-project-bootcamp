@@ -1,35 +1,111 @@
+//массив с карточками
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+//переменные для редактирование профиля
+const formEditContain = document.getElementById("editContainer");
+const nameInput = document.getElementById("nameInput");
+const jobInput = document.getElementById("jobInput");
+const nameOutput = document.querySelector(".profile__name");
+const jobOutput = document.querySelector(".profile__job");
+const profileSaveBtn = document.getElementById("save__profile");
+//переменные для добавления новой карточки
+const nameCardInput = document.getElementById("newPlace");
+const urlCardInput = document.getElementById("urlPlace");
+const formAddCard = document.getElementById("addCard");
+//переменные template для клонирования карточки
+const card = document.querySelector("#card");
+const cardPopup = document.querySelector("#popup__card");
+const cardPopupContainer = document.getElementById("cardPopupContainer");
+const cardContainer = document.querySelector(".photo-grid__list");
 //Переменные кнопок popup
 const buttonAddCard = document.querySelector(".profile__button");
 const buttonOpenProfile = document.querySelector(".profile__edit");
 const popup = document.querySelector(".popup");
 const profileForm = document.getElementById("profileForm");
 const cardForm = document.getElementById("cardForm");
+//Обработчик submit для добавления новой карты
+formAddCard.addEventListener("submit", addCard);
+//Обработчик submit для редактирования профиля
+formEditContain.addEventListener("submit", saveProfile);
 //Обработчики кнопок popup
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "Escape") {
     closePopup();
   }
 });
+//Обработчик клика закрытия попап по бэкраунду
 popup.addEventListener("click", function (evt) {
   if (evt.target.classList.contains("popup")) {
     closePopup();
   }
 });
+//Обработчик клика закрытия попап по нажатию btn close
 popup.addEventListener("click", function (evt) {
   if (evt.target.classList.contains("popup__close")) {
     closePopup();
   }
 });
+//Обработчик клика открытия формы редактирования профиля
 buttonOpenProfile.addEventListener("click", () => {
   openPopup(profileForm);
 });
+//Обработчик клика открытия формы добавления новой карточки
 buttonAddCard.addEventListener("click", () => {
   openPopup(cardForm);
 });
-// обработчик для закрытия popup карточек
-popup.addEventListener("click", function (evt) {
-  if (evt.target.classList.contains("popup__close")) {
-    closePopup();
+//обработчик контейнейра с карточками на открытие попапа с карточкой
+cardContainer.addEventListener("click", function (evt) {
+  if (evt.target.classList.contains("photo-grid__image")) {
+    openPopup(evt);
+  }
+});
+//обработчик контейнейра с карточками на удаление карточек
+cardContainer.addEventListener("click", function (evt) {
+  if (evt.target.classList.contains("photo-grid__delete")) {
+    deleteImage(evt);
+  }
+});
+//слушатель валидации
+nameInput.addEventListener("input", () => {
+  validateInput(nameInput, formEditContain);
+});
+jobInput.addEventListener("input", () => {
+  validateInput(jobInput, formEditContain);
+});
+nameCardInput.addEventListener("input", () => {
+  validateInput(nameCardInput, formAddCard);
+});
+urlCardInput.addEventListener("input", () => {
+  validateInput(urlCardInput, formAddCard);
+});
+//обработчик контейнейра с карточками на постановку лайка
+cardContainer.addEventListener("click", function (evt) {
+  if (evt.target.classList.contains("photo-grid__like")) {
+    likeImage(evt);
   }
 });
 //универсальная функция открытия popup
@@ -64,56 +140,6 @@ function closePopup() {
     item.classList.remove("popup_opened");
   });
 }
-//массив с карточками
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-//переменные template для клонирования карточки
-const card = document.querySelector("#card");
-const cardPopup = document.querySelector("#popup__card");
-const cardPopupContainer = document.getElementById("cardPopupContainer");
-const cardContainer = document.querySelector(".photo-grid__list");
-//обработчик контейнейра с карточками на открытие попапа
-cardContainer.addEventListener("click", function (evt) {
-  if (evt.target.classList.contains("photo-grid__image")) {
-    openPopup(evt);
-  }
-});
-//обработчик контейнейра с карточками на удаление карточек
-cardContainer.addEventListener("click", function (evt) {
-  if (evt.target.classList.contains("photo-grid__delete")) {
-    deleteImage(evt);
-  }
-});
-//обработчик контейнейра с карточками на постановку лайка
-cardContainer.addEventListener("click", function (evt) {
-  if (evt.target.classList.contains("photo-grid__like")) {
-    likeImage(evt);
-  }
-});
 //функция клонирующая карточки с изменением содержимого из массива
 initialCards.forEach(function (item) {
   const cardContent = card.content.cloneNode(true);
@@ -154,12 +180,6 @@ function likeImage(evt) {
   const element = evt.target;
   element.classList.toggle("photo-grid__like_active");
 }
-//переменные для добавления новой карточки
-const nameCardInput = document.getElementById("newPlace");
-const urlCardInput = document.getElementById("urlPlace");
-const formAddCard = document.getElementById("addCard");
-//Обработчик submit для добавления новой карты
-formAddCard.addEventListener("submit", addCard);
 //функция добавления новой карточки
 function addCard(evt) {
   evt.preventDefault();
@@ -178,26 +198,6 @@ function addCard(evt) {
   urlCardInput.value = "";
   closePopup();
 }
-//переменные для редактирование профиля
-const formEditContain = document.getElementById("editContainer");
-const nameInput = document.getElementById("nameInput");
-const jobInput = document.getElementById("jobInput");
-const nameOutput = document.querySelector(".profile__name");
-const jobOutput = document.querySelector(".profile__job");
-const profileSaveBtn = document.getElementById("save__profile");
-//слушатель валидации
-nameInput.addEventListener("input", () => {
-  validateInput(nameInput, formEditContain);
-});
-jobInput.addEventListener("input", () => {
-  validateInput(jobInput, formEditContain);
-});
-nameCardInput.addEventListener("input", () => {
-  validateInput(nameCardInput, formAddCard);
-});
-urlCardInput.addEventListener("input", () => {
-  validateInput(urlCardInput, formAddCard);
-});
 //функция валидации поля
 function validateInput(elementForm, cardForm) {
   if (!elementForm.validity.valid) {
@@ -223,7 +223,7 @@ function validateForm(form) {
     saveButtonn.setAttribute("disabled", true);
   }
 }
-//функция для сохраненния внесенных изменений и скрытия попапа
+//функция для сохраненения изменений в профиле
 function saveProfile(evt) {
   evt.preventDefault();
   const nameValue = nameInput.value;
@@ -232,5 +232,3 @@ function saveProfile(evt) {
   jobOutput.textContent = jobValue;
   closePopup();
 }
-//Обработчик submit для редактирования профиля
-formEditContain.addEventListener("submit", saveProfile);

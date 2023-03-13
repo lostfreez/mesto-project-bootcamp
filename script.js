@@ -49,6 +49,7 @@ function openPopup(form) {
       jobInput.value = jobOutput.textContent;
     }
     validateForm(form);
+    resetError();
   }
 }
 //универсальная функция закрытия popup
@@ -234,3 +235,11 @@ function saveProfile(evt) {
 }
 //Обработчик submit для редактирования профиля
 formEditContain.addEventListener("submit", saveProfile);
+//функция удаления ошибок
+function resetError(){
+  const inputs = document.querySelectorAll('.popup__error-container');
+  inputs.forEach((item) => {
+    item.textContent = "";
+    item.previousElementSibling.classList.remove("popup__edit_error");
+  });
+}

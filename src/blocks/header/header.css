@@ -1,0 +1,27 @@
+.header {
+  width: calc(100vw - 400px);
+  margin-top: 45px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+@media (max-width: 1065px) {
+  .header {
+    width: calc(100vw - 200px);
+  }
+}
+@media (max-width: 860px) {
+  .header {
+    width: calc(100vw - 100px);
+  }
+}
+@media (max-width: 760px) {
+  .header {
+    width: calc(100vw - 50px);
+  }
+}
+@media (max-width: 610px) {
+  .header {
+    margin-top: 28px;
+    padding-bottom: 27px;
+  }
+}

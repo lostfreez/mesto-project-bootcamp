@@ -13,6 +13,9 @@
   opacity: 0;
   visibility: hidden;
 }
+.popup__container:hover{
+  cursor: default;
+}
 @media (max-width: 550px) {
   .popup__container {
     max-width: 282px;

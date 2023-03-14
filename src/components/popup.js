@@ -3,6 +3,7 @@ const profile = document.querySelector(".popup_type_profile");
 const card = document.querySelector(".popup_type_card-form");
 const cardPopup = document.querySelector(".popup_type_image");
 const cardContainer = document.querySelector(".photo-grid__list");
+const popups = document.querySelectorAll('.popup');
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
 const displayJob = document.querySelector(".profile__job");
@@ -16,6 +17,7 @@ const buttonCloseCard = card.querySelector(".popup__close");
 const buttonOpenProfile = document.querySelector(".profile__edit");
 const buttonOpenCardForm = document.querySelector(".profile__button");
 const buttonClosePopupImage = cardPopup.querySelector(".popup__close");
+
 //Поля ввода
 const inputName = document.getElementById("name");
 const inputJob = document.getElementById("job");
@@ -45,6 +47,14 @@ function enableButtons() {
     if (evt.key === "Escape") {
       closePopup();
     }
+  });
+  //навешиваем слушатели на фон попапа для функции закрытия
+  popups.forEach((background) => {
+    background.addEventListener("click", function (event) {
+      if (event.target.classList.contains("popup")) {
+        closePopup();
+      }
+    });
   });
   //Кнопки сохранения формы
   buttonSaveProfile.addEventListener("click", saveProfile);

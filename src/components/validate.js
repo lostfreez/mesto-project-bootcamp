@@ -1,35 +1,51 @@
-//функция валидации поля
-function validateInput(elementForm, cardForm) {
-    if (!elementForm.validity.valid) {
-      elementForm.classList.add("popup__edit_error");
-      elementForm.nextElementSibling.textContent = elementForm.validationMessage;
-    }
-    if (elementForm.validity.valid) {
-      elementForm.nextElementSibling.textContent = "";
-      elementForm.classList.remove("popup__edit_error");
-    }
-    validateForm(cardForm);
-  }
-//функция валидации формы
-function validateForm(form) {
-    const saveButtonn = form.querySelector(".popup__save");
-    const formInputs = Array.from(form.querySelectorAll(".popup__edit"));
-    const input = (element) => element.validity.valid;
-    if (formInputs.every(input)) {
-      saveButtonn.classList.remove("popup__save_disabled");
-      saveButtonn.removeAttribute("disabled");
-    } else {
-      saveButtonn.classList.add("popup__save_disabled");
-      saveButtonn.setAttribute("disabled", true);
-    }
-  }
-  //Сброс ошибок при повторном открытии формы
-  function resetError(){
-    const inputs = document.querySelectorAll('.popup__error-container');
-    inputs.forEach((item) => {
-      item.textContent = "";
-      item.previousElementSibling.classList.remove("popup__edit_error");
-    });
-  }
+const showInputError = (inputElement, errorMessage) => {
+  inputElement.classList.add("popup__edit_error");
+  inputElement.nextElementSibling.textContent = errorMessage;
+};
 
-  export {validateInput, validateForm, resetError}
+const hideInputError = (inputElement) => {
+  inputElement.classList.remove("popup__edit_error");
+  inputElement.nextElementSibling.textContent = "";
+};
+
+const checkInputValidity = (inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(inputElement);
+  }
+};
+function enableValidation() {
+  const forms = Array.from(document.querySelectorAll(".popup__form"));
+  forms.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+}
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__edit"));
+  const button = formElement.querySelector(".popup__save");
+  toggleButtonState(inputList, button);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(inputElement);
+      toggleButtonState(inputList, button);
+    });
+  });
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+function toggleButtonState(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("popup__save_disabled");
+  } else {
+    buttonElement.classList.remove("popup__save_disabled");
+  }
+}
+
+export { enableValidation, toggleButtonState, hideInputError };

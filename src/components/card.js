@@ -25,37 +25,63 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-//Константы
-const cardPopup = document.querySelector("#popup__card");
+//Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
+const cardFormElement = document.querySelector(".popup_type_card-form");
+const cardForm = cardFormElement.querySelector(".popup__form");
+//Константы ввода
+const inputNamePlace = document.getElementById("newPlace");
+const inputUrlPlace = document.getElementById("newUrl");
 
+//template
+const card = document.getElementById("card");
 //функция клонирующая карточки с изменением содержимого из массива
-function addCardsArray() {
+function addCardsDefault() {
   initialCards.forEach(function (item) {
     const cardContent = card.content.cloneNode(true);
-    const cardContentPopup = cardPopup.content.cloneNode(true);
     cardContent.querySelector(".photo-grid__image").src = item.link;
     cardContent.querySelector(".photo-grid__city").textContent = item.name;
-    cardContentPopup.querySelector(".popup__image").src = item.link;
-    cardContentPopup.querySelector(".popup__place-name").textContent =
-      item.name;
-    giveId(cardContent, cardContentPopup); //присваиваем каждой карточке уникальный id
     cardContainer.prepend(cardContent);
-    cardPopupContainer.prepend(cardContentPopup);
   });
 }
-//функция постановки лайка на карточку
-function likeImage(evt) {
-  const element = evt.target;
-  element.classList.toggle("photo-grid__like_active");
+//инициализация функциона работы с карточками
+function enableCardsFuncs() {
+  //Подключение обработчика событий на кнопку удаления карточек
+  cardContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("photo-grid__delete")) {
+      deleteCard(event);
+    }
+  });
+  //Подключение обработчика событий на кнопку постановки лайка
+  cardContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("photo-grid__like")) {
+      likeCard(event);
+    }
+  });
+  //Подключение обработчика событий на кнопку создать новую карточку
+  cardForm.addEventListener("submit", addCard)
 }
-//Функция удаления карточки
-function deleteImage(evt) {
-  const element = evt.target;
-  const card = element.closest(".photo-grid__card");
-  const cardPopup = document.getElementById("popup" + card.id);
-  card.remove();
-  cardPopup.remove();
+//функция добавления новой карточки на страницу
+function addCard(event) {
+  event.preventDefault();
+  const nameValue = inputNamePlace.value;
+  const urlValue = inputUrlPlace.value;
+  const cardContent = card.content.cloneNode(true);
+  cardContent.querySelector(".photo-grid__city").textContent = nameValue;
+  cardContent.querySelector(".photo-grid__image").src = urlValue;
+  cardContainer.prepend(cardContent);
+  inputNamePlace.value = "";
+  inputUrlPlace.value = "";
+  closePopup();
 }
-import { giveId } from "./utils";
-export {deleteImage, likeImage, addCardsArray}
+//функция удаления карточки
+function deleteCard(event) {
+  event.target.parentElement.remove();
+}
+//функция постановки лайка
+function likeCard(event) {
+  event.target.classList.toggle("photo-grid__like_active");
+}
+
+import { closePopup } from "./popup";
+export { addCardsDefault, enableCardsFuncs };

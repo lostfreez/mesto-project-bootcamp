@@ -16,6 +16,7 @@
     .popup__edit {
         margin: 0 22px 0;
         max-width: 238px;
+        padding-bottom: 5px;
     }
   }
   

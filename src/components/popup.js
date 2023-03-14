@@ -1,74 +1,104 @@
-//константы
-const popup = document.querySelector(".popup");
-const nameOutput = document.querySelector(".profile__name");
-const jobOutput = document.querySelector(".profile__job");
-const nameCardInput = document.getElementById("newPlace");
-const urlCardInput = document.getElementById("urlPlace");
-const cardPopup = document.querySelector("#popup__card");
+//Константы страницы
+const profile = document.querySelector(".popup_type_profile");
+const card = document.querySelector(".popup_type_card-form");
+const cardPopup = document.querySelector(".popup_type_image");
 const cardContainer = document.querySelector(".photo-grid__list");
-
-
-//функция для сохраненения изменений в профиле из popup editForm
-function saveProfile(evt) {
-  evt.preventDefault();
-  const nameValue = nameInput.value;
-  const jobValue = jobInput.value;
-  nameOutput.textContent = nameValue;
-  jobOutput.textContent = jobValue;
-  closePopup();
-}
-//функция добавления новой карточки из popup addForm
-function addCard(evt) {
-    evt.preventDefault();
-    const nameValue = nameCardInput.value;
-    const placeValue = urlCardInput.value;
-    const cardContent = card.content.cloneNode(true);
-    const cardContentPopup = cardPopup.content.cloneNode(true);
-    cardContent.querySelector(".photo-grid__image").src = placeValue;
-    cardContent.querySelector(".photo-grid__city").textContent = nameValue;
-    cardContentPopup.querySelector(".popup__image").src = placeValue;
-    cardContentPopup.querySelector(".popup__place-name").textContent = nameValue;
-    giveId(cardContent, cardContentPopup);
-    cardContainer.prepend(cardContent);
-    cardPopupContainer.prepend(cardContentPopup);
-    nameCardInput.value = "";
-    urlCardInput.value = "";
+//Константы профиля
+const displayName = document.querySelector(".profile__name");
+const displayJob = document.querySelector(".profile__job");
+//Константы карточки
+const displayPlace = cardPopup.querySelector(".popup__place-name");
+const displayImage = cardPopup.querySelector(".popup__image");
+//Кнопки
+const buttonSaveProfile = profile.querySelector(".popup__save");
+const buttonCloseProfile = profile.querySelector(".popup__close");
+const buttonCloseCard = card.querySelector(".popup__close");
+const buttonOpenProfile = document.querySelector(".profile__edit");
+const buttonOpenCardForm = document.querySelector(".profile__button");
+const buttonClosePopupImage = cardPopup.querySelector(".popup__close");
+//Поля ввода
+const inputName = document.getElementById("name");
+const inputJob = document.getElementById("job");
+//Подключаем обработчики кнопок открытия/закрытия
+function enableButtons() {
+  cardContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("photo-grid__image")) {
+      openPopup(event);
+    }
+  });
+  buttonOpenProfile.addEventListener("click", () => {
+    openPopup(profile);
+  });
+  buttonOpenCardForm.addEventListener("click", () => {
+    openPopup(card);
+  });
+  buttonCloseProfile.addEventListener("click", () => {
     closePopup();
-  }
-//универсальная функция открытия popup
+  });
+  buttonCloseCard.addEventListener("click", () => {
+    closePopup();
+  });
+  buttonClosePopupImage.addEventListener("click", () => {
+    closePopup();
+  });
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closePopup();
+    }
+  });
+  //Кнопки сохранения формы
+  buttonSaveProfile.addEventListener("click", saveProfile);
+}
+//функция открытия popup
 function openPopup(form) {
-  const element = form.target;
-  if (element) {
-    const container = element.closest(".photo-grid__card");
-    const popupContainer = document.getElementById("popup" + container.id);
-    cardPopupContainer.classList.add("popup_opened");
-    popupContainer.classList.add("popup_opened");
-    popup.classList.add("popup_background_opened");
+  const image = form.target;
+  if (image) {
+    const foot = image.nextElementSibling;
+    const place = foot.querySelector(".photo-grid__city");
+    displayPlace.textContent = place.textContent;
+    displayImage.src = image.src;
+    cardPopup.classList.add("popup_background_opened");
+    cardPopup.firstElementChild.classList.add("popup_opened");
   } else {
     form.classList.add("popup_opened");
-    popup.classList.add("popup_opened");
-    if (form === profileForm) {
-      nameInput.value = nameOutput.textContent;
-      jobInput.value = jobOutput.textContent;
+    form.firstElementChild.classList.add("popup_opened");
+    //Если открываем профиль - копируем текущее name и job в поля ввода формы и сразу выполняем валидацию полей
+    // сброс ошибок при перезагрузке формы
+    if (form === profile) {
+      displayInputs();
+      const inputList = Array.from(form.querySelectorAll(".popup__edit"));
+      const button = form.querySelector(".popup__save");
+      toggleButtonState(inputList, button);
+      inputList.forEach((input) => {
+        hideInputError(input);
+      });
     }
-    validateForm(form);
-    resetError();
   }
 }
-//универсальная функция закрытия popup
+//функция закрытия popup
 function closePopup() {
-  popup.classList.remove("popup_opened");
-  popup.classList.remove("popup_background_opened");
-  const popups = document.querySelectorAll(".popup__container");
-  const popupsCards = document.querySelectorAll(".popup__card");
-  popups.forEach((item) => {
+  const popupsArray = document.querySelectorAll(".popup");
+  popupsArray.forEach(function (item) {
     item.classList.remove("popup_opened");
-  });
-  popupsCards.forEach((item) => {
-    item.classList.remove("popup_opened");
+    item.classList.remove("popup_background_opened");
+    item.firstElementChild.classList.remove("popup_opened");
   });
 }
 
-import { giveId } from "./utils";
-import {validateForm, resetError} from "./validate";
-export {closePopup, openPopup, addCard, saveProfile}
+//функция сохранения формы profile
+function saveProfile(event) {
+  event.preventDefault();
+  const nameValue = inputName.value;
+  const jobValue = inputJob.value;
+  displayName.textContent = nameValue;
+  displayJob.textContent = jobValue;
+  closePopup(profile);
+}
+//функция копирования текущего name и job в поля ввода
+function displayInputs() {
+  inputName.value = displayName.textContent;
+  inputJob.value = displayJob.textContent;
+}
+//экспорт
+import { toggleButtonState, hideInputError } from "./validate";
+export { enableButtons, closePopup };

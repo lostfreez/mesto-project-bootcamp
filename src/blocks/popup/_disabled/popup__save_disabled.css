@@ -2,6 +2,7 @@
     background-color: white;
     color: #000;
     opacity: 0.4;
+    pointer-events: none;
 }
 .popup__save_disabled:hover{
     cursor:default;

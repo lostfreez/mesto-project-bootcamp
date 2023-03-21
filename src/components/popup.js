@@ -72,16 +72,11 @@ function openPopup(form) {
   } else {
     form.classList.add("popup_opened");
     form.firstElementChild.classList.add("popup_opened");
-    //Если открываем профиль - копируем текущее name и job в поля ввода формы и сразу выполняем валидацию полей
-    // сброс ошибок при перезагрузке формы
+    //Если открываем профиль - копируем текущее name и job и повторно валидируем форму для сброса ошибок
     if (form === profile) {
       displayInputs();
-      const inputList = Array.from(form.querySelectorAll(".popup__edit"));
-      const button = form.querySelector(".popup__save");
-      toggleButtonState(inputList, button);
-      inputList.forEach((input) => {
-        hideInputError(input);
-      });
+      //валидируем форму после отображения current элементов страницы профиля
+      enableValidation();
     }
   }
 }
@@ -110,5 +105,5 @@ function displayInputs() {
   inputJob.value = displayJob.textContent;
 }
 //экспорт
-import { toggleButtonState, hideInputError } from "./validate";
+import { enableValidation } from "./validate";
 export { enableButtons, closePopup };

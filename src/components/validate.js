@@ -48,4 +48,4 @@ function toggleButtonState(inputList, buttonElement) {
   }
 }
 
-export { enableValidation, toggleButtonState, hideInputError };
+export { enableValidation };

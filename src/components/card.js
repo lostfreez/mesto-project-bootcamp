@@ -73,6 +73,8 @@ function addCard(event) {
   inputNamePlace.value = "";
   inputUrlPlace.value = "";
   closePopup();
+  //валидируем форму после сброса элементов ввода
+  enableValidation();
 }
 //функция удаления карточки
 function deleteCard(event) {
@@ -82,6 +84,6 @@ function deleteCard(event) {
 function likeCard(event) {
   event.target.classList.toggle("photo-grid__like_active");
 }
-
+import { enableValidation } from "./validate"
 import { closePopup } from "./popup";
 export { addCardsDefault, enableCardsFuncs };

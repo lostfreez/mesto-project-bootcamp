@@ -30,7 +30,6 @@ function openPopup(form) {
     openImage(image);
   } else {
     form.classList.add("popup_opened");
-    console.log(form);
     form.querySelector(".popup__container").classList.add("popup_opened");
   }
   document.addEventListener("keydown", closeByEsc);

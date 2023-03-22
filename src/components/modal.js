@@ -8,12 +8,13 @@ const displayJob = document.querySelector(".profile__job");
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
 //функция выходы из фонового модального окна
-function enableButtons() {
+function enableBackgroundClose() {
   //навешиваем слушатели на фон попапа для функции закрытия
   popups.forEach((background) => {
     background.addEventListener("click", function (event) {
       if (event.target.classList.contains("popup")) {
-        closePopup();
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
       }
     });
   });
@@ -51,4 +52,4 @@ function displayInputs() {
   inputJob.value = displayJob.textContent;
 }
 //экспорт
-export { enableButtons, closePopup, openPopup, displayInputs, saveProfile };
+export { enableBackgroundClose, closePopup, openPopup, displayInputs, saveProfile };

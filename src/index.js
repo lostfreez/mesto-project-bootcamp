@@ -30,8 +30,8 @@ buttonClosePopupImage.addEventListener("click", () => {
 buttonSaveProfile.addEventListener("click", saveProfile);
 buttonAddCard.addEventListener("click", addCard);
 
-//Подключаем кнопки модальных окон и форм
-enableButtons();
+//Подключаем слушатели на закрытие модальных окон по клику на фон
+enableBackgroundClose();
 //загружаем на страницу стандартный набор карточек
 addCardsDefault();
 //Подгружаем данные профиля в поля ввода

@@ -42,5 +42,5 @@ enableValidation();
 
 import "./pages/index.css";
 import { addCardsDefault, addCard } from "./components/card";
-import { enableButtons, displayInputs, saveProfile, openPopup, closePopup} from "./components/modal";
+import { enableBackgroundClose, displayInputs, saveProfile, openPopup, closePopup} from "./components/modal";
 import { enableValidation } from "./components/validate";

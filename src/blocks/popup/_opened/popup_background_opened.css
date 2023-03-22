@@ -1,6 +1,0 @@
-.popup_background_opened{
-  transition: all 0.5s ease-out;
-  opacity: 1;
-  visibility: visible;
-  background-color: rgba(0, 0, 0, 0.9);
-}

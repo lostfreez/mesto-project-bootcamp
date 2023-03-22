@@ -27,9 +27,13 @@ const initialCards = [
 ];
 //Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
+const cardPopup = document.querySelector(".popup_type_image");
 //Константы ввода
 const inputNamePlace = document.getElementById("place-input");
 const inputUrlPlace = document.getElementById("url-input");
+//Константы карточки
+const displayPlace = cardPopup.querySelector(".popup__place-name");
+const displayImage = cardPopup.querySelector(".popup__image");
 
 //template
 const cardTemplate = document
@@ -65,7 +69,7 @@ function createCard() {
   inputUrlPlace.value = "";
   //Подключение обработчика событий на открытие попапа карточки
   const buttonOpenImage = cardContent.querySelector(".photo-grid__image");
-  buttonOpenImage.addEventListener("click", openPopup);
+  buttonOpenImage.addEventListener("click", openImage);
   //Подключение обработчика событий на кнопку удаления карточек
   const buttonDeleteCard = cardContent.querySelector(".photo-grid__delete");
   buttonDeleteCard.addEventListener("click", deleteCard);
@@ -74,6 +78,15 @@ function createCard() {
   buttonLikeCard.addEventListener("click", likeCard);
   //возвращаем созданную карточку
   return cardContent;
+}
+//Функция открытия изображения
+function openImage(evt) {
+  const image = evt.target;
+  const card = image.closest(".photo-grid__card");
+  const place = card.querySelector(".photo-grid__city");
+  displayPlace.textContent = place.textContent;
+  displayImage.src = image.src;
+  openPopup(cardPopup);
 }
 //функция удаления карточки
 function deleteCard(event) {

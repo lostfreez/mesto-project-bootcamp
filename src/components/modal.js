@@ -1,14 +1,9 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
-const cardPopup = document.querySelector(".popup_type_image");
-const popupImage = cardPopup.querySelector(".popup__card")
 const popups = document.querySelectorAll(".popup");
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
 const displayJob = document.querySelector(".profile__job");
-//Константы карточки
-const displayPlace = cardPopup.querySelector(".popup__place-name");
-const displayImage = cardPopup.querySelector(".popup__image");
 //Поля ввода
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
@@ -25,23 +20,9 @@ function enableButtons() {
 }
 //функция открытия popup
 function openPopup(form) {
-  const image = form.target;
-  if (image) {
-    openImage(image);
-  } else {
-    form.classList.add("popup_opened");
-    form.querySelector(".popup__container").classList.add("popup_opened");
-  }
+  form.classList.add("popup_opened");
+  form.querySelector(".popup__container, .popup__card").classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
-}
-//Функция открытия изображения
-function openImage(image){
-  const card = image.closest(".photo-grid__card");
-  const place = card.querySelector(".photo-grid__city");
-  displayPlace.textContent = place.textContent;
-  displayImage.src = image.src;
-  cardPopup.classList.add("popup_background_opened");
-  popupImage.classList.add("popup_opened");
 }
 //функция закрытия popup
 function closePopup() {

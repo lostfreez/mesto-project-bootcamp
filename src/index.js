@@ -1,7 +1,7 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
 const card = document.querySelector(".popup_type_card-form");
-const cardPopup = document.querySelector(".popup_type_image");
+const imagePopup = document.querySelector(".popup_type_image");
 //Кнопки
 const buttonAddCard = card.querySelector(".popup__save");
 const buttonSaveProfile = profile.querySelector(".popup__save");
@@ -9,7 +9,7 @@ const buttonCloseProfile = profile.querySelector(".popup__close");
 const buttonCloseCard = card.querySelector(".popup__close");
 const buttonOpenProfile = document.querySelector(".profile__edit");
 const buttonOpenCardForm = document.querySelector(".profile__button");
-const buttonClosePopupImage = cardPopup.querySelector(".popup__close");
+const buttonClosePopupImage = imagePopup.querySelector(".popup__close");
 //Подключаем обработчики на кнопки
 buttonOpenProfile.addEventListener("click", () => {
   openPopup(profile);
@@ -18,13 +18,13 @@ buttonOpenCardForm.addEventListener("click", () => {
   openPopup(card);
 });
 buttonCloseProfile.addEventListener("click", () => {
-  closePopup();
+  closePopup(profile);
 });
 buttonCloseCard.addEventListener("click", () => {
-  closePopup();
+  closePopup(card);
 });
 buttonClosePopupImage.addEventListener("click", () => {
-  closePopup();
+  closePopup(imagePopup);
 });
 //Кнопки сохранения формы
 buttonSaveProfile.addEventListener("click", saveProfile);

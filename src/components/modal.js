@@ -21,18 +21,12 @@ function enableButtons() {
 //функция открытия popup
 function openPopup(form) {
   form.classList.add("popup_opened");
-  form.querySelector(".popup__container, .popup__card").classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
 }
 //функция закрытия popup
-function closePopup() {
-  const popupsArray = document.querySelectorAll(".popup");
-  popupsArray.forEach(function (item) {
-    item.classList.remove("popup_opened");
-    item.classList.remove("popup_background_opened");
-    item.firstElementChild.classList.remove("popup_opened");
-    document.removeEventListener("keydown", closeByEsc);
-  });
+function closePopup(form) {
+  form.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEsc);
 }
 //Функция колбэк для закрытия модального окна с кнопки
 function closeByEsc(evt) {

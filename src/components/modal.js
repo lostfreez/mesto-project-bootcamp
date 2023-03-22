@@ -1,6 +1,7 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
 const cardPopup = document.querySelector(".popup_type_image");
+const popupImage = cardPopup.querySelector(".popup__card")
 const popups = document.querySelectorAll(".popup");
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
@@ -26,17 +27,22 @@ function enableButtons() {
 function openPopup(form) {
   const image = form.target;
   if (image) {
-    const foot = image.nextElementSibling;
-    const place = foot.querySelector(".photo-grid__city");
-    displayPlace.textContent = place.textContent;
-    displayImage.src = image.src;
-    cardPopup.classList.add("popup_background_opened");
-    cardPopup.firstElementChild.classList.add("popup_opened");
+    openImage(image);
   } else {
     form.classList.add("popup_opened");
-    form.firstElementChild.classList.add("popup_opened");
+    console.log(form);
+    form.querySelector(".popup__container").classList.add("popup_opened");
   }
   document.addEventListener("keydown", closeByEsc);
+}
+//Функция открытия изображения
+function openImage(image){
+  const card = image.closest(".photo-grid__card");
+  const place = card.querySelector(".photo-grid__city");
+  displayPlace.textContent = place.textContent;
+  displayImage.src = image.src;
+  cardPopup.classList.add("popup_background_opened");
+  popupImage.classList.add("popup_opened");
 }
 //функция закрытия popup
 function closePopup() {

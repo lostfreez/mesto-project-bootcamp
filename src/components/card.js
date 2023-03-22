@@ -27,8 +27,6 @@ const initialCards = [
 ];
 //Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
-const cardFormElement = document.querySelector(".popup_type_card-form");
-const cardForm = cardFormElement.querySelector(".popup__form");
 //Константы ввода
 const inputNamePlace = document.getElementById("place-input");
 const inputUrlPlace = document.getElementById("url-input");
@@ -86,5 +84,5 @@ function likeCard(event) {
   event.target.classList.toggle("photo-grid__like_active");
 }
 import { enableValidation } from "./validate";
-import { closePopup, openPopup } from "./popup";
+import { closePopup, openPopup } from "./modal";
 export { addCardsDefault, addCard };

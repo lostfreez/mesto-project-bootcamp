@@ -1,8 +1,6 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
-const card = document.querySelector(".popup_type_card-form");
 const cardPopup = document.querySelector(".popup_type_image");
-const cardContainer = document.querySelector(".photo-grid__list");
 const popups = document.querySelectorAll(".popup");
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
@@ -10,35 +8,11 @@ const displayJob = document.querySelector(".profile__job");
 //Константы карточки
 const displayPlace = cardPopup.querySelector(".popup__place-name");
 const displayImage = cardPopup.querySelector(".popup__image");
-//Кнопки
-const buttonAddCard = card.querySelector(".popup__save");
-const buttonSaveProfile = profile.querySelector(".popup__save");
-const buttonCloseProfile = profile.querySelector(".popup__close");
-const buttonCloseCard = card.querySelector(".popup__close");
-const buttonOpenProfile = document.querySelector(".profile__edit");
-const buttonOpenCardForm = document.querySelector(".profile__button");
-const buttonClosePopupImage = cardPopup.querySelector(".popup__close");
-
 //Поля ввода
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
-//Инициализируем работу кнопок форм
+//функция выходы из фонового модального окна
 function enableButtons() {
-  buttonOpenProfile.addEventListener("click", () => {
-    openPopup(profile);
-  });
-  buttonOpenCardForm.addEventListener("click", () => {
-    openPopup(card);
-  });
-  buttonCloseProfile.addEventListener("click", () => {
-    closePopup();
-  });
-  buttonCloseCard.addEventListener("click", () => {
-    closePopup();
-  });
-  buttonClosePopupImage.addEventListener("click", () => {
-    closePopup();
-  });
   document.addEventListener("keydown", function (evt) {
     if (evt.key === "Escape") {
       closePopup();
@@ -52,9 +26,6 @@ function enableButtons() {
       }
     });
   });
-  //Кнопки сохранения формы
-  buttonSaveProfile.addEventListener("click", saveProfile);
-  buttonAddCard.addEventListener("click", addCard);
 }
 //функция открытия popup
 function openPopup(form) {
@@ -97,6 +68,4 @@ function displayInputs() {
   inputJob.value = displayJob.textContent;
 }
 //экспорт
-import { addCard } from "./card";
-import { enableValidation } from "./validate";
-export { enableButtons, closePopup, openPopup, displayInputs };
+export { enableButtons, closePopup, openPopup, displayInputs, saveProfile };

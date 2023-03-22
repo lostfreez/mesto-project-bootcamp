@@ -60,7 +60,7 @@
           <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
           <form class="popup__form" action="" novalidate>
             <input
-              id="name"
+              id="name-input"
               class="popup__edit"
               type="text"
               placeholder="Имя"
@@ -68,9 +68,9 @@
               minlength="2"
               maxlength="40"
             />
-            <p class="popup__error-container"></p>
+            <p class="name-input-error popup__error-container"></p>
             <input
-              id="job"
+              id="job-input"
               class="popup__edit"
               type="text"
               placeholder="О себе"
@@ -78,7 +78,7 @@
               minlength="2"
               maxlength="200"
             />
-            <p class="popup__error-container"></p>
+            <p class="job-input-error popup__error-container"></p>
             <button type="submit" class="popup__save">Сохранить</button>
           </form>
           <button type="button" class="popup__close"></button>
@@ -89,7 +89,7 @@
           <h3 class="popup__title">Новое&nbsp;место</h3>
           <form class="popup__form" action="" novalidate>
             <input
-              id = "newPlace"
+              id = "place-input"
               class="popup__edit"
               type="text"
               placeholder="Новое место"
@@ -97,15 +97,15 @@
               minlength="2"
               maxlength="30"
             />
-            <p class="popup__error-container"></p>
+            <p class="place-input-error popup__error-container"></p>
             <input
-              id="newUrl"
+              id="url-input"
               class="popup__edit"
               type="url"
               placeholder="Ссылка на картинку"
               required
             />
-            <p class="popup__error-container"></p>
+            <p class="url-input-error popup__error-container"></p>
             <button type="submit" class="popup__save">Создать</button>
           </form>
           <button type="button" class="popup__close"></button>

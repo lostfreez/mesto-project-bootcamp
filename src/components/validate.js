@@ -1,18 +1,19 @@
-const showInputError = (inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("popup__edit_error");
-  inputElement.nextElementSibling.textContent = errorMessage;
+  errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (inputElement) => {
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("popup__edit_error");
-  inputElement.nextElementSibling.textContent = "";
+  errorElement.textContent = "";
 };
-
-const checkInputValidity = (inputElement) => {
+const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(inputElement);
+    hideInputError(formElement, inputElement);
   }
 };
 function enableValidation() {
@@ -28,7 +29,7 @@ const setEventListeners = (formElement) => {
   toggleButtonState(inputList, button);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(inputElement);
+      checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, button);
     });
   });

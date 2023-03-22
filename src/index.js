@@ -6,7 +6,9 @@ enableButtons();
 addCardsDefault();
 //Подключение валидации полей
 enableValidation();
+//Подгружаем данные профиля в поля ввода
+displayInputs();
 
-import {addCardsDefault, enableCardsFuncs} from "./components/card"
-import {enableButtons} from "./components/popup"
+import {addCardsDefault} from "./components/card"
+import {enableButtons, displayInputs} from "./components/popup"
 import {enableValidation} from "./components/validate"

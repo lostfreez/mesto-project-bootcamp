@@ -30,8 +30,8 @@ const cardContainer = document.querySelector(".photo-grid__list");
 const cardFormElement = document.querySelector(".popup_type_card-form");
 const cardForm = cardFormElement.querySelector(".popup__form");
 //Константы ввода
-const inputNamePlace = document.getElementById("newPlace");
-const inputUrlPlace = document.getElementById("newUrl");
+const inputNamePlace = document.getElementById("place-input");
+const inputUrlPlace = document.getElementById("url-input");
 
 //template
 const cardTemplate = document

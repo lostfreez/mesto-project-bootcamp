@@ -13,11 +13,6 @@ const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
 //функция выходы из фонового модального окна
 function enableButtons() {
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      closePopup();
-    }
-  });
   //навешиваем слушатели на фон попапа для функции закрытия
   popups.forEach((background) => {
     background.addEventListener("click", function (event) {
@@ -40,8 +35,8 @@ function openPopup(form) {
   } else {
     form.classList.add("popup_opened");
     form.firstElementChild.classList.add("popup_opened");
-    //Если открываем профиль - копируем текущее name и job и повторно валидируем форму для сброса ошибок
   }
+  document.addEventListener("keydown", closeByEsc);
 }
 //функция закрытия popup
 function closePopup() {
@@ -50,7 +45,15 @@ function closePopup() {
     item.classList.remove("popup_opened");
     item.classList.remove("popup_background_opened");
     item.firstElementChild.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEsc);
   });
+}
+//Функция колбэк для закрытия модального окна с кнопки
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
 }
 
 //функция сохранения формы profile

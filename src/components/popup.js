@@ -11,6 +11,7 @@ const displayJob = document.querySelector(".profile__job");
 const displayPlace = cardPopup.querySelector(".popup__place-name");
 const displayImage = cardPopup.querySelector(".popup__image");
 //Кнопки
+const buttonAddCard = card.querySelector(".popup__save")
 const buttonSaveProfile = profile.querySelector(".popup__save");
 const buttonCloseProfile = profile.querySelector(".popup__close");
 const buttonCloseCard = card.querySelector(".popup__close");
@@ -21,13 +22,8 @@ const buttonClosePopupImage = cardPopup.querySelector(".popup__close");
 //Поля ввода
 const inputName = document.getElementById("name");
 const inputJob = document.getElementById("job");
-//Подключаем обработчики кнопок открытия/закрытия
+//Инициализируем работу кнопок форм
 function enableButtons() {
-  cardContainer.addEventListener("click", function (event) {
-    if (event.target.classList.contains("photo-grid__image")) {
-      openPopup(event);
-    }
-  });
   buttonOpenProfile.addEventListener("click", () => {
     openPopup(profile);
   });
@@ -58,6 +54,7 @@ function enableButtons() {
   });
   //Кнопки сохранения формы
   buttonSaveProfile.addEventListener("click", saveProfile);
+  buttonAddCard.addEventListener("click", addCard);
 }
 //функция открытия popup
 function openPopup(form) {
@@ -105,5 +102,6 @@ function displayInputs() {
   inputJob.value = displayJob.textContent;
 }
 //экспорт
+import {addCard} from "./card"
 import { enableValidation } from "./validate";
-export { enableButtons, closePopup };
+export { enableButtons, closePopup, openPopup };

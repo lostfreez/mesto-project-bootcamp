@@ -28,6 +28,7 @@ const initialCards = [
 //Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
 const cardPopup = document.querySelector(".popup_type_image");
+const card = document.querySelector(".popup_type_card-form");
 //Константы ввода
 const inputNamePlace = document.getElementById("place-input");
 const inputUrlPlace = document.getElementById("url-input");
@@ -48,15 +49,48 @@ function addCardsDefault() {
     cardContainer.prepend(cardContent);
   });
 }
+//Функция обрабатывающая массив с карточками подруженный с сервера
+function addCardsFromData(array) {
+  array.forEach(function (item) {
+    inputNamePlace.value = item.name;
+    inputUrlPlace.value = item.link;
+    const cardContent = createCard();
+    cardContainer.prepend(cardContent);
+  });
+}
 //функция добавления карточки по введенным данным из формы
 function addCard(e) {
   e.preventDefault();
+  const nameData = inputNamePlace.value;
+  const urlData = inputUrlPlace.value;
   const cardContent = createCard();
-  cardContainer.prepend(cardContent);
-  //закрываем форму после добавления карточки
-  closePopup();
-  //валидируем форму после сброса элементов ввода
-  enableValidation();
+  // отправляем данные на сервер
+  fetch("https://nomoreparties.co/v1/wbf-cohort-6/cards", {
+    method: "POST",
+    headers: {
+      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: nameData,
+      link: urlData,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // обновляем элементы на странице после успешного сохранения на сервере
+        cardContainer.prepend(cardContent);
+        closePopup(card);
+        enableValidation();
+      } else {
+        response.json().then((errorData) => {
+          console.error("Ошибка HTTP: " + response.status, errorData);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Ошибка запроса:", error);
+    });
 }
 //функция создания карточки
 function createCard() {
@@ -98,4 +132,4 @@ function likeCard(event) {
 }
 import { enableValidation } from "./validate";
 import { closePopup, openPopup } from "./modal";
-export { addCardsDefault, addCard };
+export { addCardsDefault, addCard, addCardsFromData };

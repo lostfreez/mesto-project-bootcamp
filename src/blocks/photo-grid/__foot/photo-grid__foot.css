@@ -1,12 +1,12 @@
 .photo-grid__foot {
   display: flex;
   justify-content: space-between;
-  margin: 16px 20px 30px;
+  margin: 16px 20px 21px;
   align-items: center;
 }
 
 @media (max-width: 610px) {
   .photo-grid__foot {
-    margin: 25px 20px 30px;
+    margin: 25px 20px 21px;
   }
 }

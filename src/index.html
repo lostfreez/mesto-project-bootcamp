@@ -45,7 +45,10 @@
                 />
                 <div class="photo-grid__foot">
                   <h2 class="photo-grid__city">Карачаевск</h2>
-                  <button class="photo-grid__like"></button>
+                  <div class="photo-grid__like-container">
+                    <button class="photo-grid__like"></button>
+                    <p class="photo-grid__likes">0</p>
+                  </div>
                 </div>
               </li>
             </template>
@@ -89,7 +92,7 @@
           <h3 class="popup__title">Новое&nbsp;место</h3>
           <form class="popup__form" action="" novalidate>
             <input
-              id = "place-input"
+              id="place-input"
               class="popup__edit"
               type="text"
               placeholder="Новое место"

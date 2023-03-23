@@ -42,14 +42,46 @@ function saveProfile(event) {
   event.preventDefault();
   const nameValue = inputName.value;
   const jobValue = inputJob.value;
-  displayName.textContent = nameValue;
-  displayJob.textContent = jobValue;
-  closePopup(profile);
+
+  // отправляем данные на сервер
+  fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me", {
+    method: "PATCH",
+    headers: {
+      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: inputName.value,
+      about: inputJob.value,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // обновляем элементы на странице после успешного сохранения на сервере
+        displayName.textContent = nameValue;
+        displayJob.textContent = jobValue;
+        closePopup(profile);
+      } else {
+        response.json().then((errorData) => {
+          console.error("Ошибка HTTP: " + response.status, errorData);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Ошибка запроса:", error);
+    });
 }
+
 //функция копирования текущего name и job в поля ввода
 function displayInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
 //экспорт
-export { enableBackgroundClose, closePopup, openPopup, displayInputs, saveProfile };
+export {
+  enableBackgroundClose,
+  closePopup,
+  openPopup,
+  displayInputs,
+  saveProfile,
+};

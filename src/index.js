@@ -32,17 +32,14 @@ buttonAddCard.addEventListener("click", addCard);
 
 //Подключаем слушатели на закрытие модальных окон по клику на фон
 enableBackgroundClose();
-//загружаем на страницу стандартный набор карточек
-//addCardsDefault(); //изабавляемся от старого способа загрузки карточек
 //Подключение валидации полей
 enableValidation();
-
+//загружаем данные профиля
+getDataProfile();
 
 import "./pages/index.css";
-import { addCardsDefault, addCard } from "./components/card";
+import { addCard } from "./components/card";
 import { enableBackgroundClose, displayInputs, saveProfile, openPopup, closePopup} from "./components/modal";
 import { enableValidation } from "./components/validate";
-import {getDataProfile, getDataCards} from "./components/api"
+import {getDataProfile } from "./components/api"
 
-getDataProfile();
-getDataCards();

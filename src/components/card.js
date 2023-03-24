@@ -26,6 +26,7 @@ function addCardsFromData(array) {
 //функция добавления карточки по введенным данным из формы
 function addCard(e) {
   e.preventDefault();
+  renderLoading(true);
   // отправляем данные на сервер
   fetch("https://nomoreparties.co/v1/wbf-cohort-6/cards", {
     method: "POST",
@@ -44,8 +45,6 @@ function addCard(e) {
           console.log(data);
           const cardContent = createCard(data);
           cardContainer.prepend(cardContent);
-          closePopup(card);
-          enableValidation();
         });
       } else {
         response.json().then((errorData) => {
@@ -55,6 +54,11 @@ function addCard(e) {
     })
     .catch((error) => {
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(false);
+      closePopup(card);
+      enableValidation();
     });
 }
 //функция создания карточки
@@ -191,7 +195,7 @@ function dislikeCard(event){
     });
 }
 
-
+import { renderLoading } from "./utils"
 import { enableValidation } from "./validate";
 import { closePopup, openPopup } from "./modal";
 import { userData } from "./api";

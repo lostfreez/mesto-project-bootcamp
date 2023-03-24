@@ -43,6 +43,7 @@ function closeByEsc(evt) {
 //функция сохранения формы profile
 function saveProfile(event) {
   event.preventDefault();
+  renderLoading(true);
   const nameValue = inputName.value;
   const jobValue = inputJob.value;
 
@@ -63,7 +64,6 @@ function saveProfile(event) {
         // обновляем элементы на странице после успешного сохранения на сервере
         displayName.textContent = nameValue;
         displayJob.textContent = jobValue;
-        closePopup(profile);
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -72,11 +72,16 @@ function saveProfile(event) {
     })
     .catch((error) => {
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(false);
+      closePopup(profile);
     });
 }
 //функция обновления аватарки
 function updateAvatar(e) {
   e.preventDefault();
+  renderLoading(true);
   console.log(inputAvatar.value);
   fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me/avatar", {
     method: "PATCH",
@@ -92,9 +97,7 @@ function updateAvatar(e) {
       if (response.ok) {
         // обновляем элементы на странице после успешного сохранения на сервере
         profileAvatar.link = inputAvatar.value;
-        closePopup(popupAvatar);
         inputAvatar.value = "";
-        enableValidation();
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -103,6 +106,11 @@ function updateAvatar(e) {
     })
     .catch((error) => {
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(false);
+      closePopup(popupAvatar);
+      enableValidation();
     });
 }
 
@@ -111,7 +119,7 @@ function displayInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
-
+import { renderLoading } from "./utils"
 import { enableValidation } from "./validate";
 //экспорт
 export {

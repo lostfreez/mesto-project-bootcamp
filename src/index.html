@@ -18,12 +18,8 @@
       <main class="main">
         <section class="profile">
           <div class="profile__avatar-overlay">
-          <img
-            class="profile__avatar"
-            src=""
-            alt="Аватарка профиля"
-          />
-        </div>
+            <img class="profile__avatar" src="" alt="Аватарка профиля" />
+          </div>
           <div class="profile__info">
             <h1 class="profile__name"></h1>
             <p class="profile__job"></p>
@@ -136,6 +132,14 @@
             />
             <p class="avatar-input-error popup__error-container"></p>
             <button type="submit" class="popup__save">Сохранить</button>
+          </form>
+          <button type="button" class="popup__close"></button>
+        </div>
+      </div>
+      <div class="popup popup_type_delete">
+        <div class="popup__container popup__container_type_delete">
+          <h3 class="popup__title">Вы&nbsp;уверены?</h3>
+            <button type="submit" class="popup__save">Да</button>
           </form>
           <button type="button" class="popup__close"></button>
         </div>

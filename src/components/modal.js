@@ -1,7 +1,6 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
 const popupAvatar = document.querySelector(".popup_type_avatar");
-const popups = document.querySelectorAll(".popup");
 const profileAvatar = document.querySelector(".profile__avatar");
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
@@ -10,27 +9,29 @@ const displayJob = document.querySelector(".profile__job");
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
 const inputAvatar = document.getElementById("avatar-input");
-//функция выходы из фонового модального окна
+//функция выхода из фонового модального окна
 function enableBackgroundClose() {
-  //навешиваем слушатели на фон попапа для функции закрытия
-  popups.forEach((background) => {
-    background.addEventListener("click", function (event) {
-      if (event.target.classList.contains("popup")) {
-        const openedPopup = document.querySelector(".popup_opened");
-        closePopup(openedPopup);
-      }
-    });
-  });
+  const openedPopup = document.querySelector(".popup_opened");
+  openedPopup.addEventListener("click", backgroundClick);
+}
+//Проверка клика вне контейнера
+function backgroundClick(event) {
+  if (event.target.classList.contains("popup_opened")) {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
 }
 //функция открытия popup
 function openPopup(form) {
   form.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
+  enableBackgroundClose();
 }
 //функция закрытия popup
 function closePopup(form) {
   form.classList.remove("popup_opened");
   document.removeEventListener("keydown", closeByEsc);
+  form.removeEventListener("click", backgroundClick);
 }
 //Функция колбэк для закрытия модального окна с кнопки
 function closeByEsc(evt) {
@@ -82,7 +83,6 @@ function saveProfile(event) {
 function updateAvatar(e) {
   e.preventDefault();
   renderLoading(true);
-  console.log(inputAvatar.value);
   fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me/avatar", {
     method: "PATCH",
     headers: {
@@ -119,7 +119,7 @@ function displayInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
-import { renderLoading } from "./utils"
+import { renderLoading } from "./utils";
 import { enableValidation } from "./validate";
 //экспорт
 export {

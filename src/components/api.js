@@ -24,7 +24,7 @@ function getDataProfile() {
       displayInputs();
     })
     .then(() => {
-        getDataCards();
+      getDataCards();
     })
     .catch((error) => {
       console.error("Ошибка в функции getDataProfile:", error);
@@ -45,7 +45,6 @@ function getDataCards() {
     })
     .then((data) => {
       cards = data;
-      console.log(cards);
     })
     .then(() => {
       addCardsFromData(cards);

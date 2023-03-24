@@ -1,12 +1,15 @@
 //Константы страницы
 const profile = document.querySelector(".popup_type_profile");
+const popupAvatar = document.querySelector(".popup_type_avatar");
 const popups = document.querySelectorAll(".popup");
+const profileAvatar = document.querySelector(".profile__avatar");
 //Константы профиля
 const displayName = document.querySelector(".profile__name");
 const displayJob = document.querySelector(".profile__job");
 //Поля ввода
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");
+const inputAvatar = document.getElementById("avatar-input");
 //функция выходы из фонового модального окна
 function enableBackgroundClose() {
   //навешиваем слушатели на фон попапа для функции закрытия
@@ -71,12 +74,45 @@ function saveProfile(event) {
       console.error("Ошибка запроса:", error);
     });
 }
+//функция обновления аватарки
+function updateAvatar(e) {
+  e.preventDefault();
+  console.log(inputAvatar.value);
+  fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me/avatar", {
+    method: "PATCH",
+    headers: {
+      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      avatar: inputAvatar.value,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // обновляем элементы на странице после успешного сохранения на сервере
+        profileAvatar.link = inputAvatar.value;
+        closePopup(popupAvatar);
+        inputAvatar.value = "";
+        enableValidation();
+      } else {
+        response.json().then((errorData) => {
+          console.error("Ошибка HTTP: " + response.status, errorData);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Ошибка запроса:", error);
+    });
+}
 
 //функция копирования текущего name и job в поля ввода
 function displayInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
+
+import { enableValidation } from "./validate";
 //экспорт
 export {
   enableBackgroundClose,
@@ -84,4 +120,5 @@ export {
   openPopup,
   displayInputs,
   saveProfile,
+  updateAvatar,
 };

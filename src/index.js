@@ -2,7 +2,9 @@
 const profile = document.querySelector(".popup_type_profile");
 const card = document.querySelector(".popup_type_card-form");
 const imagePopup = document.querySelector(".popup_type_image");
+const popupAvatar = document.querySelector(".popup_type_avatar");
 //Кнопки
+const buttonUpdateAvatar = popupAvatar.querySelector(".popup__save");
 const buttonAddCard = card.querySelector(".popup__save");
 const buttonSaveProfile = profile.querySelector(".popup__save");
 const buttonCloseProfile = profile.querySelector(".popup__close");
@@ -10,7 +12,15 @@ const buttonCloseCard = card.querySelector(".popup__close");
 const buttonOpenProfile = document.querySelector(".profile__edit");
 const buttonOpenCardForm = document.querySelector(".profile__button");
 const buttonClosePopupImage = imagePopup.querySelector(".popup__close");
+const buttonAvatarOpen = document.querySelector(".profile__avatar-overlay");
+const buttonAvatarClose = popupAvatar.querySelector(".popup__close");
 //Подключаем обработчики на кнопки
+buttonAvatarClose.addEventListener("click", () => {
+  closePopup(popupAvatar);
+});
+buttonAvatarOpen.addEventListener("click", () => {
+  openPopup(popupAvatar);
+});
 buttonOpenProfile.addEventListener("click", () => {
   openPopup(profile);
 });
@@ -29,6 +39,7 @@ buttonClosePopupImage.addEventListener("click", () => {
 //Кнопки сохранения формы
 buttonSaveProfile.addEventListener("click", saveProfile);
 buttonAddCard.addEventListener("click", addCard);
+buttonUpdateAvatar.addEventListener("click", updateAvatar);
 
 //Подключаем слушатели на закрытие модальных окон по клику на фон
 enableBackgroundClose();
@@ -39,7 +50,12 @@ getDataProfile();
 
 import "./pages/index.css";
 import { addCard } from "./components/card";
-import { enableBackgroundClose, displayInputs, saveProfile, openPopup, closePopup} from "./components/modal";
+import {
+  enableBackgroundClose,
+  updateAvatar,
+  saveProfile,
+  openPopup,
+  closePopup,
+} from "./components/modal";
 import { enableValidation } from "./components/validate";
-import {getDataProfile } from "./components/api"
-
+import { getDataProfile } from "./components/api";

@@ -20,7 +20,7 @@
           <div class="profile__avatar-overlay">
           <img
             class="profile__avatar"
-            src="<%=require('./images/avatar.png')%>"
+            src=""
             alt="Аватарка профиля"
           />
         </div>
@@ -121,6 +121,23 @@
           <button class="popup__close"></button>
           <img class="popup__image" src="" />
           <p class="popup__place-name"></p>
+        </div>
+      </div>
+      <div class="popup popup_type_avatar">
+        <div class="popup__container popup__container_type_avatar">
+          <h3 class="popup__title">Обновить&nbsp;аватар</h3>
+          <form class="popup__form" action="" novalidate>
+            <input
+              id="avatar-input"
+              class="popup__edit"
+              type="url"
+              placeholder="Ссылка на изображение"
+              required
+            />
+            <p class="avatar-input-error popup__error-container"></p>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </form>
+          <button type="button" class="popup__close"></button>
         </div>
       </div>
     </div>

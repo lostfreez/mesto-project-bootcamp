@@ -39,3 +39,4 @@
 @import url(../blocks/popup/_error/popup__edit_error.css);
 @import url(../blocks/popup/__error-container/popup__error-container.css);
 @import url(../blocks/popup/_type/popup_type_image.css);
+@import url(../blocks/popup/_type/popup__container_type_avatar.css);

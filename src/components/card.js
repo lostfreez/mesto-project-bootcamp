@@ -98,7 +98,7 @@ function openImage(evt) {
 //функция удаления карточки
 function deleteCard(event) {
   const id = event.target.closest(".photo-grid__card").getAttribute("data-id");
-  fetch(`https://nomoreparties.co/v1/wbf-cohort-/cards/${id}`, {
+  fetch(`https://nomoreparties.co/v1/wbf-cohort-6/cards/${id}`, {
     method: "DELETE",
     headers: {
       authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",

@@ -65,6 +65,8 @@ function saveProfile(event) {
         // обновляем элементы на странице после успешного сохранения на сервере
         displayName.textContent = nameValue;
         displayJob.textContent = jobValue;
+        renderLoading(false);
+        closePopup(profile);
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -72,11 +74,8 @@ function saveProfile(event) {
       }
     })
     .catch((error) => {
-      console.error("Ошибка запроса:", error);
-    })
-    .finally(() => {
       renderLoading(false);
-      closePopup(profile);
+      console.error("Ошибка запроса:", error);
     });
 }
 //функция обновления аватарки

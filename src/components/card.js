@@ -44,6 +44,8 @@ function addCard(e) {
         response.json().then((data) => {
           const cardContent = createCard(data);
           cardContainer.prepend(cardContent);
+          renderLoading(false);
+          closePopup(card);
         });
       } else {
         response.json().then((errorData) => {
@@ -52,12 +54,8 @@ function addCard(e) {
       }
     })
     .catch((error) => {
-      console.error("Ошибка запроса:", error);
-    })
-    .finally(() => {
       renderLoading(false);
-      closePopup(card);
-      enableValidation();
+      console.error("Ошибка запроса:", error);
     });
 }
 //функция создания карточки

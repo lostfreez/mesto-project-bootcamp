@@ -12,10 +12,10 @@ const inputAvatar = document.getElementById("avatar-input");
 //функция выхода из фонового модального окна
 function enableBackgroundClose() {
   const openedPopup = document.querySelector(".popup_opened");
-  openedPopup.addEventListener("click", backgroundClick);
+  openedPopup.addEventListener("click", closeByClickBackground);
 }
 //Проверка клика вне контейнера
-function backgroundClick(event) {
+function closeByClickBackground(event) {
   if (event.target.classList.contains("popup_opened")) {
     const openedPopup = document.querySelector(".popup_opened");
     closePopup(openedPopup);
@@ -31,7 +31,7 @@ function openPopup(form) {
 function closePopup(form) {
   form.classList.remove("popup_opened");
   document.removeEventListener("keydown", closeByEsc);
-  form.removeEventListener("click", backgroundClick);
+  form.removeEventListener("click", closeByClickBackground);
 }
 //Функция колбэк для закрытия модального окна с кнопки
 function closeByEsc(evt) {
@@ -76,10 +76,9 @@ function updateAvatar(e) {
 }
 
 //функция копирования текущего name и job в поля ввода
-function displayInputs() {
+function showInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
-  validateForm(profile);
 }
 import { saveProfileRequest, updateAvatarRequest } from "./api";
 import { renderLoading } from "./utils";
@@ -89,7 +88,7 @@ export {
   enableBackgroundClose,
   closePopup,
   openPopup,
-  displayInputs,
+  showInputs,
   saveProfile,
   updateAvatar,
 };

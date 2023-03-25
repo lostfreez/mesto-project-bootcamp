@@ -60,7 +60,7 @@ function createCard(response) {
   //Подключение обработчика событий на кнопку удаления карточек
   if (cardContent.querySelector(".photo-grid__delete")) {
     const buttonDeleteCard = cardContent.querySelector(".photo-grid__delete");
-    buttonDeleteCard.addEventListener("click", openDeletePopup);
+    buttonDeleteCard.addEventListener("click", openPopupDeletion);
   }
   //возвращаем созданную карточку
   return cardContent;
@@ -68,7 +68,7 @@ function createCard(response) {
 //буфер памяти для внесения данных об удаляемой карточке
 let cardDelete = "";
 //функция загрузки удаляемой карточки в буфер для последующего удаления
-function openDeletePopup(event) {
+function openPopupDeletion(event) {
   cardDelete = event.target
     .closest(".photo-grid__card")
     .getAttribute("data-id");

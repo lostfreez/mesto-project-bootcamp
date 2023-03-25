@@ -2,6 +2,7 @@
 const name = document.querySelector(".profile__name");
 const job = document.querySelector(".profile__job");
 const avatar = document.querySelector(".profile__avatar");
+const profile = document.querySelector(".popup_type_profile");
 
 //Функция ux визуально отображающая применение изменений на странице в формах popup
 let buffer = "";
@@ -24,7 +25,8 @@ function getDataProfile() {
     .then((response) => {
       userId = response._id;
       insertDataProfile(response);
-      displayInputs();
+      showInputs();
+      validateForm(profile);
       getDataCards();
     })
     .catch((error) => {
@@ -48,8 +50,9 @@ function insertDataProfile(response) {
   avatar.src = response.avatar;
 }
 
+import { validateForm } from "./validate";
 import { getCardsRequest, getUserRequest } from "./api";
 import { addCardsFromData } from "./card";
-import { displayInputs } from "./modal";
+import { showInputs } from "./modal";
 export { getDataProfile };
 export { renderLoading };

@@ -46,6 +46,7 @@ function addCard(e) {
           cardContainer.prepend(cardContent);
           renderLoading(false);
           closePopup(card);
+          validateForm(card);
         });
       } else {
         response.json().then((errorData) => {
@@ -209,7 +210,7 @@ function dislikeCard(event) {
 }
 
 import { renderLoading } from "./utils";
-import { enableValidation } from "./validate";
+import { validateForm } from "./validate";
 import { closePopup, openPopup } from "./modal";
 import { userData } from "./api";
 export { addCard, addCardsFromData, confirmDeletion };

@@ -34,6 +34,11 @@ const setEventListeners = (formElement) => {
     });
   });
 };
+function validateForm (formElement){
+  const inputList = Array.from(formElement.querySelectorAll(".popup__edit"));
+  const button = formElement.querySelector(".popup__save");
+  toggleButtonState(inputList, button);
+}
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -51,4 +56,4 @@ function toggleButtonState(inputList, buttonElement) {
   }
 }
 
-export { enableValidation };
+export { enableValidation, validateForm };

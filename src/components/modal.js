@@ -67,6 +67,7 @@ function saveProfile(event) {
         displayJob.textContent = jobValue;
         renderLoading(false);
         closePopup(profile);
+        validateForm(profile);
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -99,6 +100,7 @@ function updateAvatar(e) {
         inputAvatar.value = "";
         renderLoading(false);
         closePopup(popupAvatar);
+        validateForm(popupAvatar);
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -115,9 +117,10 @@ function updateAvatar(e) {
 function displayInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
+  validateForm(profile);
 }
 import { renderLoading } from "./utils";
-import { enableValidation } from "./validate";
+import { validateForm } from "./validate";
 //экспорт
 export {
   enableBackgroundClose,

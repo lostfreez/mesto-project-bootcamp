@@ -51,6 +51,10 @@ function createCard(response) {
     cardContent.querySelector(".photo-grid__delete").remove();
   }
   hasLike(response, cardContent);
+  const imgElement = cardContent.querySelector(".photo-grid__image");
+  const altText = imgElement.getAttribute("alt");
+  const newAltText = `${altText} ${response.name}`;
+  imgElement.setAttribute("alt", newAltText);
   cardContent.setAttribute("data-id", response._id);
   cardContent.querySelector(".photo-grid__city").textContent = response.name;
   cardContent.querySelector(".photo-grid__image").src = response.link;

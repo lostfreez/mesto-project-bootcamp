@@ -1,4 +1,6 @@
 .photo-grid__card {
+  display: flex;
+  flex-direction: column;
   position: relative;
   background-color: white;
   color: black;

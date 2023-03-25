@@ -38,11 +38,12 @@
               <li class="photo-grid__card">
                 <button class="photo-grid__delete"></button>
                 <img
-                  src="<%=require('./images/img1.png')%>"
+                  src=""
                   class="photo-grid__image"
+                  alt="Здесь должна быть картинка загруженная пользователем"
                 />
                 <div class="photo-grid__foot">
-                  <h2 class="photo-grid__city">Карачаевск</h2>
+                  <h2 class="photo-grid__city"></h2>
                   <div class="photo-grid__like-container">
                     <button class="photo-grid__like"></button>
                     <p class="photo-grid__likes">0</p>
@@ -115,7 +116,11 @@
       <div class="popup popup_type_image">
         <div class="popup__card">
           <button class="popup__close"></button>
-          <img class="popup__image" src="" />
+          <img
+            class="popup__image"
+            src=""
+            alt="Здесь должна быть картинка загруженная пользователем"
+          />
           <p class="popup__place-name"></p>
         </div>
       </div>
@@ -138,7 +143,8 @@
       </div>
       <div class="popup popup_type_delete">
         <div class="popup__container popup__container_type_delete">
-          <h3 class="popup__title">Вы&nbsp;уверены?</h3>
+          <form class="popup__form" action="" novalidate>
+            <h3 class="popup__title">Вы&nbsp;уверены?</h3>
             <button type="submit" class="popup__save">Да</button>
           </form>
           <button type="button" class="popup__close"></button>

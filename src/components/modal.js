@@ -96,8 +96,10 @@ function updateAvatar(e) {
     .then((response) => {
       if (response.ok) {
         // обновляем элементы на странице после успешного сохранения на сервере
-        profileAvatar.link = inputAvatar.value;
+        profileAvatar.src = inputAvatar.value;
         inputAvatar.value = "";
+        renderLoading(false);
+        closePopup(popupAvatar);
       } else {
         response.json().then((errorData) => {
           console.error("Ошибка HTTP: " + response.status, errorData);
@@ -105,12 +107,8 @@ function updateAvatar(e) {
       }
     })
     .catch((error) => {
-      console.error("Ошибка запроса:", error);
-    })
-    .finally(() => {
       renderLoading(false);
-      closePopup(popupAvatar);
-      enableValidation();
+      console.error("Ошибка запроса:", error);
     });
 }
 

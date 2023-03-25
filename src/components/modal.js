@@ -45,34 +45,12 @@ function closeByEsc(evt) {
 function saveProfile(event) {
   event.preventDefault();
   renderLoading(true);
-  const nameValue = inputName.value;
-  const jobValue = inputJob.value;
-
-  // отправляем данные на сервер
-  fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me", {
-    method: "PATCH",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: inputName.value,
-      about: inputJob.value,
-    }),
-  })
+  saveProfileRequest(inputName, inputJob)
     .then((response) => {
-      if (response.ok) {
-        // обновляем элементы на странице после успешного сохранения на сервере
-        displayName.textContent = nameValue;
-        displayJob.textContent = jobValue;
-        renderLoading(false);
-        closePopup(profile);
-        validateForm(profile);
-      } else {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
+      displayName.textContent = response.name;
+      displayJob.textContent = response.about;
+      renderLoading(false);
+      closePopup(profile);
     })
     .catch((error) => {
       renderLoading(false);
@@ -83,29 +61,13 @@ function saveProfile(event) {
 function updateAvatar(e) {
   e.preventDefault();
   renderLoading(true);
-  fetch("https://nomoreparties.co/v1/wbf-cohort-6/users/me/avatar", {
-    method: "PATCH",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      avatar: inputAvatar.value,
-    }),
-  })
+  updateAvatarRequest(inputAvatar)
     .then((response) => {
-      if (response.ok) {
-        // обновляем элементы на странице после успешного сохранения на сервере
-        profileAvatar.src = inputAvatar.value;
-        inputAvatar.value = "";
-        renderLoading(false);
-        closePopup(popupAvatar);
-        validateForm(popupAvatar);
-      } else {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
+      profileAvatar.src = response.avatar;
+      inputAvatar.value = "";
+      renderLoading(false);
+      closePopup(popupAvatar);
+      validateForm(popupAvatar);
     })
     .catch((error) => {
       renderLoading(false);
@@ -119,6 +81,7 @@ function displayInputs() {
   inputJob.value = displayJob.textContent;
   validateForm(profile);
 }
+import { saveProfileRequest, updateAvatarRequest } from "./api";
 import { renderLoading } from "./utils";
 import { validateForm } from "./validate";
 //экспорт

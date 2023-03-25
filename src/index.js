@@ -63,4 +63,4 @@ import {
   closePopup,
 } from "./components/modal";
 import { enableValidation } from "./components/validate";
-import { getDataProfile } from "./components/api";
+import { getDataProfile } from "./components/utils";

@@ -15,10 +15,8 @@ const cardTemplate = document
   .content.querySelector(".photo-grid__card");
 
 //Функция обрабатывающая массив с карточками подруженный с сервера
-function addCardsFromData(array) {
-  array.forEach(function (item) {
-    inputNamePlace.value = item.name;
-    inputUrlPlace.value = item.link;
+function addCardsFromData(response) {
+  response.forEach(function (item) {
     const cardContent = createCard(item);
     cardContainer.prepend(cardContent);
   });
@@ -27,32 +25,15 @@ function addCardsFromData(array) {
 function addCard(e) {
   e.preventDefault();
   renderLoading(true);
-  // отправляем данные на сервер
-  fetch("https://nomoreparties.co/v1/wbf-cohort-6/cards", {
-    method: "POST",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: inputNamePlace.value,
-      link: inputUrlPlace.value,
-    }),
-  })
+  createCardRequest(inputNamePlace, inputUrlPlace)
     .then((response) => {
-      if (response.ok) {
-        response.json().then((data) => {
-          const cardContent = createCard(data);
-          cardContainer.prepend(cardContent);
-          renderLoading(false);
-          closePopup(card);
-          validateForm(card);
-        });
-      } else {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
+      inputNamePlace.value = "";
+      inputUrlPlace.value = "";
+      const cardContent = createCard(response);
+      cardContainer.prepend(cardContent);
+      renderLoading(false);
+      closePopup(card);
+      validateForm(card);
     })
     .catch((error) => {
       renderLoading(false);
@@ -60,23 +41,19 @@ function addCard(e) {
     });
 }
 //функция создания карточки
-function createCard(data) {
-  const nameValue = inputNamePlace.value;
-  const urlValue = inputUrlPlace.value;
+function createCard(response) {
   const cardContent = cardTemplate.cloneNode(true);
-  if (typeof data === "object" && data.hasOwnProperty("likes")) {
+  if (typeof response === "object" && response.hasOwnProperty("likes")) {
     cardContent.querySelector(".photo-grid__likes").textContent =
-      data.likes.length;
+      response.likes.length;
   }
-  if (data.owner._id !== userData._id) {
+  if (response.owner._id !== userId) {
     cardContent.querySelector(".photo-grid__delete").remove();
   }
-  hasLike(data, cardContent);
-  cardContent.setAttribute("data-id", data._id);
-  cardContent.querySelector(".photo-grid__city").textContent = nameValue;
-  cardContent.querySelector(".photo-grid__image").src = urlValue;
-  inputNamePlace.value = "";
-  inputUrlPlace.value = "";
+  hasLike(response, cardContent);
+  cardContent.setAttribute("data-id", response._id);
+  cardContent.querySelector(".photo-grid__city").textContent = response.name;
+  cardContent.querySelector(".photo-grid__image").src = response.link;
   //Подключение обработчика событий на открытие попапа карточки
   const buttonOpenImage = cardContent.querySelector(".photo-grid__image");
   buttonOpenImage.addEventListener("click", openImage);
@@ -88,11 +65,11 @@ function createCard(data) {
   //возвращаем созданную карточку
   return cardContent;
 }
-//буфер памяти для сохранения удаляемой карточки
-let deletionCard = "";
+//буфер памяти для внесения данных об удаляемой карточке
+let cardDelete = "";
 //функция загрузки удаляемой карточки в буфер для последующего удаления
 function openDeletePopup(event) {
-  deletionCard = event.target
+  cardDelete = event.target
     .closest(".photo-grid__card")
     .getAttribute("data-id");
   openPopup(popupDelete);
@@ -100,7 +77,7 @@ function openDeletePopup(event) {
 //Функция подтверждающая удаление карточки пользователем
 function confirmDeletion(e) {
   e.preventDefault();
-  deleteCard(deletionCard);
+  deleteCard(cardDelete);
   closePopup(popupDelete);
 }
 
@@ -115,33 +92,20 @@ function openImage(evt) {
 }
 
 //функция удаления карточки
-function deleteCard(deletionCard) {
-  fetch(`https://nomoreparties.co/v1/wbf-cohort-6/cards/${deletionCard}`, {
-    method: "DELETE",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
-      return response.json();
-    })
+function deleteCard(cardDelete) {
+  deleteRequest(cardDelete)
     .then(() => {
-      document.querySelector(`[data-id="${deletionCard}"]`).remove();
+      document.querySelector(`[data-id="${cardDelete}"]`).remove();
     })
     .catch((error) => {
       console.error("Ошибка в функции deleteCard:", error);
     });
 }
 //функция проверки лайка
-function hasLike(data, cardContent) {
+function hasLike(response, cardContent) {
   const buttonLikeCard = cardContent.querySelector(".photo-grid__like");
-  const hasUserLike = data.likes.find(function (item) {
-    return item._id === userData._id;
+  const hasUserLike = response.likes.find(function (item) {
+    return item._id === userId;
   });
   if (hasUserLike) {
     buttonLikeCard.classList.add("photo-grid__like_active");
@@ -155,24 +119,11 @@ function likeCard(event) {
   const card = event.target.closest(".photo-grid__card");
   const id = card.getAttribute("data-id");
   const likes = card.querySelector(".photo-grid__likes");
-  fetch(`https://nomoreparties.co/v1/wbf-cohort-6/cards/likes/${id}`, {
-    method: "put",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-    },
-  })
+  likeRequest(id)
     .then((response) => {
-      if (!response.ok) {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
-      return response.json();
-    })
-    .then((data) => {
       event.target.removeEventListener("click", likeCard);
       event.target.classList.add("photo-grid__like_active");
-      likes.textContent = data.likes.length;
+      likes.textContent = response.likes.length;
       event.target.addEventListener("click", dislikeCard);
     })
     .catch((error) => {
@@ -184,33 +135,26 @@ function dislikeCard(event) {
   const card = event.target.closest(".photo-grid__card");
   const id = card.getAttribute("data-id");
   const likes = card.querySelector(".photo-grid__likes");
-  fetch(`https://nomoreparties.co/v1/wbf-cohort-6/cards/likes/${id}`, {
-    method: "DELETE",
-    headers: {
-      authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
-    },
-  })
+  dislikeRequest(id)
     .then((response) => {
-      if (!response.ok) {
-        response.json().then((errorData) => {
-          console.error("Ошибка HTTP: " + response.status, errorData);
-        });
-      }
-      return response.json();
-    })
-    .then((data) => {
       event.target.removeEventListener("click", dislikeCard);
       event.target.classList.remove("photo-grid__like_active");
-      likes.textContent = data.likes.length;
+      likes.textContent = response.likes.length;
       event.target.addEventListener("click", likeCard);
     })
     .catch((error) => {
-      console.error("Ошибка в функции likeCard:", error);
+      console.error("Ошибка в функции dislikeCard:", error);
     });
 }
 
+import {
+  dislikeRequest,
+  likeRequest,
+  deleteRequest,
+  createCardRequest,
+} from "./api";
 import { renderLoading } from "./utils";
 import { validateForm } from "./validate";
 import { closePopup, openPopup } from "./modal";
-import { userData } from "./api";
+import { userId } from "./utils";
 export { addCard, addCardsFromData, confirmDeletion };

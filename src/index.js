@@ -1,7 +1,9 @@
 //Константы страницы
 export const profile = document.querySelector(".popup_type_profile");
 export const card = document.querySelector(".popup_type_card-form");
-import { imagePopup } from "./components/card";
+export const imagePopup = document.querySelector(".popup_type_image");
+export const displayPlace = imagePopup.querySelector(".popup__place-name");
+export const displayImage = imagePopup.querySelector(".popup__image");
 export const popupAvatar = document.querySelector(".popup_type_avatar");
 export const popupDelete = document.querySelector(".popup_type_delete");
 //Кнопки
@@ -51,9 +53,9 @@ enableValidation();
 //загружаем данные профиля
 getDataProfile();
 
-import { cardDelete } from "./components/card";
+
 import "./pages/index.css";
-import { addCard, deleteCard } from "./components/card";
+import { addCard, deleteCard, cardDelete } from "./components/card";
 import {
   updateAvatar,
   saveProfile,

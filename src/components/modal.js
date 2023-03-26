@@ -1,8 +1,4 @@
-//Константы страницы
-import { profile } from "../index";
-import { popupAvatar } from "../index";
 export const profileAvatar = document.querySelector(".profile__avatar");
-//Константы профиля
 export const displayName = document.querySelector(".profile__name");
 export const displayJob = document.querySelector(".profile__job");
 //Поля ввода
@@ -75,6 +71,7 @@ function showInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
+import { profile, popupAvatar } from "../index";
 import { saveProfileRequest, updateAvatarRequest } from "./api";
 import { renderLoading } from "./utils";
 import { validateForm } from "./validate";

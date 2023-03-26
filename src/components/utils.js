@@ -1,9 +1,3 @@
-//Константы элементов профиля
-import { displayName as name } from "./modal";
-import { displayJob as job } from "./modal";
-import { profileAvatar as avatar } from "./modal";
-import { profile } from "../index";
-
 //Функция ux визуально отображающая применение изменений на странице в формах popup
 function renderLoading(event, isLoading, buttonText, loadingText) {
   const button = event.target.querySelector(".popup__save");
@@ -42,14 +36,15 @@ function getDataCards() {
 }
 //Встраивание данных пользователя на страницу
 function insertDataProfile(response) {
-  name.textContent = response.name;
-  job.textContent = response.about;
-  avatar.src = response.avatar;
+  displayName.textContent = response.name;
+  displayJob.textContent = response.about;
+  profileAvatar.src = response.avatar;
 }
 
+import { profile } from "../index";
 import { validateForm } from "./validate";
 import { getCardsRequest, getUserRequest } from "./api";
 import { addCardsFromData } from "./card";
-import { showInputs } from "./modal";
+import { showInputs, displayName, displayJob, profileAvatar } from "./modal";
 export { getDataProfile };
 export { renderLoading };

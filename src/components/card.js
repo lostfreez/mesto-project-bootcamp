@@ -1,14 +1,7 @@
 //Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
-export const imagePopup = document.querySelector(".popup_type_image");
-import { card } from "../index";
-import { popupDelete } from "../index";
-//Константы ввода
 const inputNamePlace = document.getElementById("place-input");
 const inputUrlPlace = document.getElementById("url-input");
-//Константы карточки
-const displayPlace = imagePopup.querySelector(".popup__place-name");
-const displayImage = imagePopup.querySelector(".popup__image");
 //template
 const cardTemplate = document
   .getElementById("card")
@@ -150,13 +143,19 @@ function dislikeCard(event) {
 }
 
 import {
+  imagePopup,
+  card,
+  popupDelete,
+  displayPlace,
+  displayImage,
+} from "../index";
+import {
   dislikeRequest,
   likeRequest,
   deleteRequest,
   createCardRequest,
 } from "./api";
-import { renderLoading } from "./utils";
+import { renderLoading, userId } from "./utils";
 import { validateForm } from "./validate";
 import { closePopup, openPopup } from "./modal";
-import { userId } from "./utils";
 export { addCard, addCardsFromData, deleteCard };

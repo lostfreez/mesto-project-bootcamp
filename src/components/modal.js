@@ -1,10 +1,10 @@
 //Константы страницы
-const profile = document.querySelector(".popup_type_profile");
-const popupAvatar = document.querySelector(".popup_type_avatar");
-const profileAvatar = document.querySelector(".profile__avatar");
+import { profile } from "../index";
+import { popupAvatar } from "../index";
+export const profileAvatar = document.querySelector(".profile__avatar");
 //Константы профиля
-const displayName = document.querySelector(".profile__name");
-const displayJob = document.querySelector(".profile__job");
+export const displayName = document.querySelector(".profile__name");
+export const displayJob = document.querySelector(".profile__job");
 //Поля ввода
 const inputName = document.getElementById("name-input");
 const inputJob = document.getElementById("job-input");

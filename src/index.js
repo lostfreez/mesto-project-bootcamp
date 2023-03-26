@@ -1,9 +1,9 @@
 //Константы страницы
-const profile = document.querySelector(".popup_type_profile");
-const card = document.querySelector(".popup_type_card-form");
-const imagePopup = document.querySelector(".popup_type_image");
-const popupAvatar = document.querySelector(".popup_type_avatar");
-const popupDelete = document.querySelector(".popup_type_delete");
+export const profile = document.querySelector(".popup_type_profile");
+export const card = document.querySelector(".popup_type_card-form");
+import { imagePopup } from "./components/card";
+export const popupAvatar = document.querySelector(".popup_type_avatar");
+export const popupDelete = document.querySelector(".popup_type_delete");
 //Кнопки
 const buttonCloseProfile = profile.querySelector(".popup__close");
 const buttonCloseCard = card.querySelector(".popup__close");

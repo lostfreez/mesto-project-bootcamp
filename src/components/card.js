@@ -1,14 +1,14 @@
 //Константы элементов страницы
 const cardContainer = document.querySelector(".photo-grid__list");
-const cardPopup = document.querySelector(".popup_type_image");
-const card = document.querySelector(".popup_type_card-form");
-const popupDelete = document.querySelector(".popup_type_delete");
+export const imagePopup = document.querySelector(".popup_type_image");
+import { card } from "../index";
+import { popupDelete } from "../index";
 //Константы ввода
 const inputNamePlace = document.getElementById("place-input");
 const inputUrlPlace = document.getElementById("url-input");
 //Константы карточки
-const displayPlace = cardPopup.querySelector(".popup__place-name");
-const displayImage = cardPopup.querySelector(".popup__image");
+const displayPlace = imagePopup.querySelector(".popup__place-name");
+const displayImage = imagePopup.querySelector(".popup__image");
 //template
 const cardTemplate = document
   .getElementById("card")
@@ -84,7 +84,7 @@ function openImage(evt) {
   const place = card.querySelector(".photo-grid__city");
   displayPlace.textContent = place.textContent;
   displayImage.src = image.src;
-  openPopup(cardPopup);
+  openPopup(imagePopup);
 }
 
 //функция удаления карточки

@@ -1,8 +1,8 @@
 //Константы элементов профиля
-const name = document.querySelector(".profile__name");
-const job = document.querySelector(".profile__job");
-const avatar = document.querySelector(".profile__avatar");
-const profile = document.querySelector(".popup_type_profile");
+import { displayName as job } from "./modal";
+import { displayJob as name } from "./modal";
+import { profileAvatar as avatar } from "./modal";
+import { profile } from "../index";
 
 //Функция ux визуально отображающая применение изменений на странице в формах popup
 function renderLoading(event, isLoading, buttonText, loadingText) {

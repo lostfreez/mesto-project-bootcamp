@@ -1,6 +1,6 @@
 //Константы элементов профиля
-import { displayName as job } from "./modal";
-import { displayJob as name } from "./modal";
+import { displayName as name } from "./modal";
+import { displayJob as job } from "./modal";
 import { profileAvatar as avatar } from "./modal";
 import { profile } from "../index";
 

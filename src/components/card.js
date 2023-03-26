@@ -24,19 +24,18 @@ function addCardsFromData(response) {
 //функция добавления карточки по введенным данным из формы
 function addCard(e) {
   e.preventDefault();
-  renderLoading(true);
+  renderLoading(e, true, "Создать", "Cохранение...");
   createCardRequest(inputNamePlace, inputUrlPlace)
     .then((response) => {
-      inputNamePlace.value = "";
-      inputUrlPlace.value = "";
+      e.target.reset();
       const cardContent = createCard(response);
       cardContainer.prepend(cardContent);
-      renderLoading(false);
-      closePopup(card);
+      renderLoading(e, false, "Создать", "Cохранение...");
       validateForm(card);
+      closePopup(card);
     })
     .catch((error) => {
-      renderLoading(false);
+      renderLoading(e, false, "Создать", "Cохранение...");
       console.error("Ошибка запроса:", error);
     });
 }
@@ -70,7 +69,7 @@ function createCard(response) {
   return cardContent;
 }
 //буфер памяти для внесения данных об удаляемой карточке
-let cardDelete = "";
+export let cardDelete = "";
 //функция загрузки удаляемой карточки в буфер для последующего удаления
 function openPopupDeletion(event) {
   cardDelete = event.target
@@ -78,12 +77,6 @@ function openPopupDeletion(event) {
     .getAttribute("data-id");
   openPopup(popupDelete);
 }
-//Функция подтверждающая удаление карточки пользователем
-function confirmDeletion(e) {
-  e.preventDefault();
-  deleteCard(cardDelete);
-}
-
 //Функция открытия изображения
 function openImage(evt) {
   const image = evt.target;
@@ -95,13 +88,17 @@ function openImage(evt) {
 }
 
 //функция удаления карточки
-function deleteCard(cardDelete) {
+function deleteCard(e, cardDelete) {
+  e.preventDefault();
+  renderLoading(e, true, "Да", "Удаление...");
   deleteRequest(cardDelete)
     .then(() => {
+      renderLoading(e, false, "Да", "Удаление...");
       document.querySelector(`[data-id="${cardDelete}"]`).remove();
       closePopup(popupDelete);
     })
     .catch((error) => {
+      renderLoading(e, false, "Да", "Удаление...");
       console.error("Ошибка в функции deleteCard:", error);
     });
 }
@@ -162,4 +159,4 @@ import { renderLoading } from "./utils";
 import { validateForm } from "./validate";
 import { closePopup, openPopup } from "./modal";
 import { userId } from "./utils";
-export { addCard, addCardsFromData, confirmDeletion };
+export { addCard, addCardsFromData, deleteCard };

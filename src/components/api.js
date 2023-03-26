@@ -4,8 +4,8 @@ const config = {
   headers: {
     authorization: "54974c2d-ab71-4b56-9932-c842ca70e522",
     "Content-Type": "application/json",
-  }
-}
+  },
+};
 //функции запросов на сервер
 export function dislikeRequest(id) {
   return fetch(`${config.baseUrl}cards/likes/${id}`, {

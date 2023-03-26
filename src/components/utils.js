@@ -5,16 +5,13 @@ const avatar = document.querySelector(".profile__avatar");
 const profile = document.querySelector(".popup_type_profile");
 
 //Функция ux визуально отображающая применение изменений на странице в формах popup
-let buffer = "";
-function renderLoading(isLoading) {
-  const popup = document.querySelector(".popup_opened");
-  const button = popup.querySelector(".popup__save");
+function renderLoading(event, isLoading, buttonText, loadingText) {
+  const button = event.target.querySelector(".popup__save");
   if (isLoading) {
-    buffer = button.textContent;
-    button.textContent = "Сохранение...";
+    button.textContent = loadingText;
   } else {
     setTimeout(function () {
-      button.textContent = buffer;
+      button.textContent = buttonText;
     }, 500);
   }
 }

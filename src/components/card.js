@@ -82,7 +82,6 @@ function openPopupDeletion(event) {
 function confirmDeletion(e) {
   e.preventDefault();
   deleteCard(cardDelete);
-  closePopup(popupDelete);
 }
 
 //Функция открытия изображения
@@ -100,6 +99,7 @@ function deleteCard(cardDelete) {
   deleteRequest(cardDelete)
     .then(() => {
       document.querySelector(`[data-id="${cardDelete}"]`).remove();
+      closePopup(popupDelete);
     })
     .catch((error) => {
       console.error("Ошибка в функции deleteCard:", error);
@@ -108,16 +108,21 @@ function deleteCard(cardDelete) {
 //функция проверки лайка
 function hasLike(response, cardContent) {
   const buttonLikeCard = cardContent.querySelector(".photo-grid__like");
+  buttonLikeCard.addEventListener("click", function (event) {
+    if (buttonLikeCard.classList.contains("photo-grid__like_active")) {
+      dislikeCard(event);
+    } else {
+      likeCard(event);
+    }
+  });
   const hasUserLike = response.likes.find(function (item) {
     return item._id === userId;
   });
   if (hasUserLike) {
     buttonLikeCard.classList.add("photo-grid__like_active");
-    buttonLikeCard.addEventListener("click", dislikeCard);
-  } else {
-    buttonLikeCard.addEventListener("click", likeCard);
   }
 }
+
 //функция постановки лайка
 function likeCard(event) {
   const card = event.target.closest(".photo-grid__card");
@@ -125,10 +130,8 @@ function likeCard(event) {
   const likes = card.querySelector(".photo-grid__likes");
   likeRequest(id)
     .then((response) => {
-      event.target.removeEventListener("click", likeCard);
       event.target.classList.add("photo-grid__like_active");
       likes.textContent = response.likes.length;
-      event.target.addEventListener("click", dislikeCard);
     })
     .catch((error) => {
       console.error("Ошибка в функции likeCard:", error);
@@ -141,10 +144,8 @@ function dislikeCard(event) {
   const likes = card.querySelector(".photo-grid__likes");
   dislikeRequest(id)
     .then((response) => {
-      event.target.removeEventListener("click", dislikeCard);
       event.target.classList.remove("photo-grid__like_active");
       likes.textContent = response.likes.length;
-      event.target.addEventListener("click", likeCard);
     })
     .catch((error) => {
       console.error("Ошибка в функции dislikeCard:", error);

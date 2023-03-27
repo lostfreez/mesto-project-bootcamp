@@ -16,8 +16,8 @@ function getDataProfile() {
     .then((response) => {
       userId = response._id;
       insertDataProfile(response);
-      showInputs();
-      validateForm(profile);
+      fillProfileInputs();
+      validateForm(popupProfile, settings);
       getDataCards();
     })
     .catch((error) => {
@@ -41,10 +41,10 @@ function insertDataProfile(response) {
   profileAvatar.src = response.avatar;
 }
 
-import { profile } from "../index";
+import { popupProfile, settings } from "../index";
 import { validateForm } from "./validate";
 import { getCardsRequest, getUserRequest } from "./api";
 import { addCardsFromData } from "./card";
-import { showInputs, displayName, displayJob, profileAvatar } from "./modal";
+import { fillProfileInputs, displayName, displayJob, profileAvatar } from "./modal";
 export { getDataProfile };
 export { renderLoading };

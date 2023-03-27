@@ -28,8 +28,7 @@ function closeByEsc(evt) {
 //Проверка клика вне контейнера
 function closeByClickBackground(evt) {
   if (evt.target.classList.contains("popup_opened")) {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
+    closePopup(evt.target);
   }
 }
 //функция сохранения формы profile
@@ -40,12 +39,13 @@ function saveProfile(event) {
     .then((response) => {
       displayName.textContent = response.name;
       displayJob.textContent = response.about;
-      renderLoading(event, false, "Сохранить", "Cохранение...");
-      closePopup(profile);
+      closePopup(popupProfile);
     })
     .catch((error) => {
-      renderLoading(event, false, "Сохранить", "Cохранение...");
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(event, false, "Сохранить", "Cохранение...");
     });
 }
 //функция обновления аватарки
@@ -54,26 +54,27 @@ function updateAvatar(evt) {
   renderLoading(evt, true, "Сохранить", "Cохранение...");
   updateAvatarRequest(inputAvatar)
     .then((response) => {
-      renderLoading(evt, false, "Сохранить", "Cохранение...");
       profileAvatar.src = response.avatar;
       evt.target.reset();
-      validateForm(popupAvatar);
+      validateForm(popupAvatar, settings);
       closePopup(popupAvatar);
     })
     .catch((error) => {
-      renderLoading(evt, false, "Сохранить", "Cохранение...");
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(evt, false, "Сохранить", "Cохранение...");
     });
 }
 
 //функция копирования текущего name и job в поля ввода
-function showInputs() {
+function fillProfileInputs() {
   inputName.value = displayName.textContent;
   inputJob.value = displayJob.textContent;
 }
-import { profile, popupAvatar } from "../index";
+import { popupProfile, popupAvatar, settings } from "../index";
 import { saveProfileRequest, updateAvatarRequest } from "./api";
 import { renderLoading } from "./utils";
 import { validateForm } from "./validate";
 //экспорт
-export { closePopup, openPopup, showInputs, saveProfile, updateAvatar };
+export { closePopup, openPopup, fillProfileInputs, saveProfile, updateAvatar };

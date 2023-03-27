@@ -1,57 +1,64 @@
+export const settings = {
+  form: ".popup__form",
+  input: ".popup__edit",
+  button: ".popup__save",
+  disabled: "popup__save_disabled",
+  error: "popup__edit_error",
+};
 //Константы страницы
-export const profile = document.querySelector(".popup_type_profile");
-export const card = document.querySelector(".popup_type_card-form");
-export const imagePopup = document.querySelector(".popup_type_image");
-export const displayPlace = imagePopup.querySelector(".popup__place-name");
-export const displayImage = imagePopup.querySelector(".popup__image");
+export const popupProfile = document.querySelector(".popup_type_profile");
+export const popupCard = document.querySelector(".popup_type_card-form");
+export const popupImage = document.querySelector(".popup_type_image");
+export const displayPlace = popupImage.querySelector(".popup__place-name");
+export const displayImage = popupImage.querySelector(".popup__image");
 export const popupAvatar = document.querySelector(".popup_type_avatar");
 export const popupDelete = document.querySelector(".popup_type_delete");
 //Кнопки
-const buttonCloseProfile = profile.querySelector(".popup__close");
-const buttonCloseCard = card.querySelector(".popup__close");
-const buttonOpenProfile = document.querySelector(".profile__edit");
-const buttonOpenCardForm = document.querySelector(".profile__button");
-const buttonClosePopupImage = imagePopup.querySelector(".popup__close");
-const buttonAvatarOpen = document.querySelector(".profile__avatar-overlay");
-const buttonAvatarClose = popupAvatar.querySelector(".popup__close");
-const buttonCloseDelete = popupDelete.querySelector(".popup__close");
+const cardCloseButton = popupCard.querySelector(".popup__close");
+const profileCloseButton = popupProfile.querySelector(".popup__close");
+const cardFormOpenButton = document.querySelector(".profile__button");
+const profileEditOpenButton = document.querySelector(".profile__edit");
+const avatarCloseButton = popupAvatar.querySelector(".popup__close");
+const avatarOpenButton = document.querySelector(".profile__avatar-overlay");
+const popupImageCloseButton = popupImage.querySelector(".popup__close");
+const deleteCloseButton = popupDelete.querySelector(".popup__close");
 
 //Подключаем обработчики на кнопки
-buttonCloseDelete.addEventListener("click", () => {
-  closePopup(popupDelete);
+deleteCloseButton.addEventListener("click", () => {
+closePopup(popupDelete);
 });
-buttonAvatarClose.addEventListener("click", () => {
-  closePopup(popupAvatar);
+avatarCloseButton.addEventListener("click", () => {
+closePopup(popupAvatar);
 });
-buttonAvatarOpen.addEventListener("click", () => {
-  openPopup(popupAvatar);
+avatarOpenButton.addEventListener("click", () => {
+openPopup(popupAvatar);
 });
-buttonOpenProfile.addEventListener("click", () => {
-  openPopup(profile);
+profileEditOpenButton.addEventListener("click", () => {
+openPopup(popupProfile);
 });
-buttonOpenCardForm.addEventListener("click", () => {
-  openPopup(card);
+cardFormOpenButton.addEventListener("click", () => {
+openPopup(popupCard);
 });
-buttonCloseProfile.addEventListener("click", () => {
-  closePopup(profile);
+profileCloseButton.addEventListener("click", () => {
+closePopup(popupProfile);
 });
-buttonCloseCard.addEventListener("click", () => {
-  closePopup(card);
+cardCloseButton.addEventListener("click", () => {
+closePopup(popupCard);
 });
-buttonClosePopupImage.addEventListener("click", () => {
-  closePopup(imagePopup);
+popupImageCloseButton.addEventListener("click", () => {
+closePopup(popupImage);
 });
 //Кнопки сохранения формы
-profile.addEventListener("submit", saveProfile);
-card.addEventListener("submit", addCard);
+popupProfile.addEventListener("submit", saveProfile);
+popupCard.addEventListener("submit", addCard);
 popupAvatar.addEventListener("submit", updateAvatar);
 popupDelete.addEventListener("submit", (e) => {
   deleteCard(e, cardDelete);
 });
 //Подключение валидации полей
-enableValidation();
+enableValidation(settings);
 //загружаем данные профиля
-getDataProfile();
+getDataProfile(settings);
 
 
 import "./pages/index.css";

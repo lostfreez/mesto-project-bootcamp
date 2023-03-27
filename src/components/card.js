@@ -23,39 +23,40 @@ function addCard(e) {
       e.target.reset();
       const cardContent = createCard(response);
       cardContainer.prepend(cardContent);
-      renderLoading(e, false, "Создать", "Cохранение...");
-      validateForm(card);
-      closePopup(card);
+      validateForm(popupCard, settings);
+      closePopup(popupCard);
     })
     .catch((error) => {
-      renderLoading(e, false, "Создать", "Cохранение...");
       console.error("Ошибка запроса:", error);
+    })
+    .finally(() => {
+      renderLoading(e, false, "Создать", "Cохранение...");
     });
 }
 //функция создания карточки
 function createCard(response) {
   const cardContent = cardTemplate.cloneNode(true);
+  const buttonDeleteCard = cardContent.querySelector(".photo-grid__delete");
   if (typeof response === "object" && response.hasOwnProperty("likes")) {
     cardContent.querySelector(".photo-grid__likes").textContent =
       response.likes.length;
   }
   if (response.owner._id !== userId) {
-    cardContent.querySelector(".photo-grid__delete").remove();
+    buttonDeleteCard.remove();
   }
   hasLike(response, cardContent);
   const imgElement = cardContent.querySelector(".photo-grid__image");
-  const altText = imgElement.getAttribute("alt");
-  const newAltText = `${altText} ${response.name}`;
-  imgElement.setAttribute("alt", newAltText);
+  imgElement.setAttribute(
+    "alt",
+    imgElement.getAttribute("alt") + " " + response.name
+  );
   cardContent.setAttribute("data-id", response._id);
   cardContent.querySelector(".photo-grid__city").textContent = response.name;
   cardContent.querySelector(".photo-grid__image").src = response.link;
   //Подключение обработчика событий на открытие попапа карточки
-  const buttonOpenImage = cardContent.querySelector(".photo-grid__image");
-  buttonOpenImage.addEventListener("click", openImage);
+  imgElement.addEventListener("click", openImage);
   //Подключение обработчика событий на кнопку удаления карточек
-  if (cardContent.querySelector(".photo-grid__delete")) {
-    const buttonDeleteCard = cardContent.querySelector(".photo-grid__delete");
+  if (buttonDeleteCard) {
     buttonDeleteCard.addEventListener("click", openPopupDeletion);
   }
   //возвращаем созданную карточку
@@ -72,12 +73,12 @@ function openPopupDeletion(event) {
 }
 //Функция открытия изображения
 function openImage(evt) {
-  const image = evt.target;
-  const card = image.closest(".photo-grid__card");
+  const card = evt.target.closest(".photo-grid__card");
   const place = card.querySelector(".photo-grid__city");
   displayPlace.textContent = place.textContent;
-  displayImage.src = image.src;
-  openPopup(imagePopup);
+  displayImage.src = evt.target.src;
+  displayImage.setAttribute("alt", evt.target.getAttribute("alt"));
+  openPopup(popupImage);
 }
 
 //функция удаления карточки
@@ -86,13 +87,14 @@ function deleteCard(e, cardDelete) {
   renderLoading(e, true, "Да", "Удаление...");
   deleteRequest(cardDelete)
     .then(() => {
-      renderLoading(e, false, "Да", "Удаление...");
       document.querySelector(`[data-id="${cardDelete}"]`).remove();
       closePopup(popupDelete);
     })
     .catch((error) => {
-      renderLoading(e, false, "Да", "Удаление...");
       console.error("Ошибка в функции deleteCard:", error);
+    })
+    .finally(() => {
+      renderLoading(e, false, "Да", "Удаление...");
     });
 }
 //функция проверки лайка
@@ -143,11 +145,12 @@ function dislikeCard(event) {
 }
 
 import {
-  imagePopup,
-  card,
+  popupImage,
+  popupCard,
   popupDelete,
   displayPlace,
   displayImage,
+  settings,
 } from "../index";
 import {
   dislikeRequest,

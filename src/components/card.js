@@ -77,9 +77,13 @@ function openImage(evt) {
   const newCard = oldCard.cloneNode(true);
   const namePopup = newCard.querySelector(".popup__place-name");
   const imagePopup = newCard.querySelector(".popup__image");
+  const imagePopupCloseButton = newCard.querySelector(".popup__close");
   const gridCard = evt.target.closest(".photo-grid__card");
   const nameGridCard = gridCard.querySelector(".photo-grid__city");
   oldCard.remove();
+  imagePopupCloseButton.addEventListener("click", () => {
+    closePopup(popupImage);
+    });
   namePopup.textContent = nameGridCard.textContent;
   imagePopup.setAttribute("alt", evt.target.getAttribute("alt"));
   imagePopup.src = evt.target.src;

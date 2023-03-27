@@ -18,7 +18,6 @@ const cardFormOpenButton = document.querySelector(".profile__button");
 const profileEditOpenButton = document.querySelector(".profile__edit");
 const avatarCloseButton = popupAvatar.querySelector(".popup__close");
 const avatarOpenButton = document.querySelector(".profile__avatar-overlay");
-const popupImageCloseButton = popupImage.querySelector(".popup__close");
 const deleteCloseButton = popupDelete.querySelector(".popup__close");
 
 //Подключаем обработчики на кнопки
@@ -42,9 +41,6 @@ closePopup(popupProfile);
 });
 cardCloseButton.addEventListener("click", () => {
 closePopup(popupCard);
-});
-popupImageCloseButton.addEventListener("click", () => {
-closePopup(popupImage);
 });
 //Кнопки сохранения формы
 popupProfile.addEventListener("submit", saveProfile);

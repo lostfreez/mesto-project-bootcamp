@@ -9,8 +9,6 @@ export const settings = {
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const popupCard = document.querySelector(".popup_type_card-form");
 export const popupImage = document.querySelector(".popup_type_image");
-export const displayPlace = popupImage.querySelector(".popup__place-name");
-export const displayImage = popupImage.querySelector(".popup__image");
 export const popupAvatar = document.querySelector(".popup_type_avatar");
 export const popupDelete = document.querySelector(".popup_type_delete");
 //Кнопки

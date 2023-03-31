@@ -34,25 +34,25 @@ function addCard(e) {
     });
 }
 //функция создания карточки
-function createCard(response) {
+function createCard(item) {
   const cardContent = cardTemplate.cloneNode(true);
   const buttonDeleteCard = cardContent.querySelector(".photo-grid__delete");
-  if (typeof response === "object" && response.hasOwnProperty("likes")) {
+  if (typeof item === "object" && item.hasOwnProperty("likes")) {
     cardContent.querySelector(".photo-grid__likes").textContent =
-      response.likes.length;
+    item.likes.length;
   }
-  if (response.owner._id !== userId) {
+  if (item.owner._id !== userId) {
     buttonDeleteCard.remove();
   }
-  hasLike(response, cardContent);
+  hasLike(item, cardContent);
   const imgElement = cardContent.querySelector(".photo-grid__image");
   imgElement.setAttribute(
     "alt",
-    imgElement.getAttribute("alt") + " " + response.name
+    imgElement.getAttribute("alt") + " " + item.name
   );
-  cardContent.setAttribute("data-id", response._id);
-  cardContent.querySelector(".photo-grid__city").textContent = response.name;
-  cardContent.querySelector(".photo-grid__image").src = response.link;
+  cardContent.setAttribute("data-id", item._id);
+  cardContent.querySelector(".photo-grid__city").textContent = item.name;
+  imgElement.src = item.link;
   //Подключение обработчика событий на открытие попапа карточки
   imgElement.addEventListener("click", openImage);
   //Подключение обработчика событий на кнопку удаления карточек
@@ -73,27 +73,13 @@ function openPopupDeletion(event) {
 }
 //Функция открытия изображения
 function openImage(evt) {
-  const oldCard = popupImage.querySelector(".popup__card");
-  const newCard = oldCard.cloneNode(true);
-  const namePopup = newCard.querySelector(".popup__place-name");
-  const imagePopup = newCard.querySelector(".popup__image");
-  const imagePopupCloseButton = newCard.querySelector(".popup__close");
   const gridCard = evt.target.closest(".photo-grid__card");
-  const nameGridCard = gridCard.querySelector(".photo-grid__city");
-  oldCard.remove();
-  imagePopupCloseButton.addEventListener("click", () => {
-    closePopup(popupImage);
-    });
-  namePopup.textContent = nameGridCard.textContent;
-  imagePopup.setAttribute("alt", evt.target.getAttribute("alt"));
-  imagePopup.src = evt.target.src;
-  //Отрисовываем новую карточку в DOM для того чтобы когда у карточки у которой по какой либо причине
-  // не загрузилось изображение - отображался альтернативный текст вместо пустого элемента.
-  popupImage.append(newCard);
+  const nameCard = gridCard.querySelector(".photo-grid__city");
+  popupImageName.textContent = nameCard.textContent;
+  popupImageSource.src = evt.target.src;
+  popupImageSource.setAttribute("alt", evt.target.getAttribute("alt"));
   openPopup(popupImage);
 }
-  
-  
 
 //функция удаления карточки
 function deleteCard(e, cardDelete) {
@@ -162,8 +148,8 @@ import {
   popupImage,
   popupCard,
   popupDelete,
-  displayPlace,
-  displayImage,
+  popupImageName,
+  popupImageSource,
   settings,
 } from "../index";
 import {

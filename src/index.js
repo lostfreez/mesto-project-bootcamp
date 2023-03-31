@@ -11,6 +11,8 @@ export const popupCard = document.querySelector(".popup_type_card-form");
 export const popupImage = document.querySelector(".popup_type_image");
 export const popupAvatar = document.querySelector(".popup_type_avatar");
 export const popupDelete = document.querySelector(".popup_type_delete");
+export const popupImageName = popupImage.querySelector(".popup__place-name");
+export const popupImageSource = popupImage.querySelector(".popup__image");
 //Кнопки
 const cardCloseButton = popupCard.querySelector(".popup__close");
 const profileCloseButton = popupProfile.querySelector(".popup__close");
@@ -19,28 +21,31 @@ const profileEditOpenButton = document.querySelector(".profile__edit");
 const avatarCloseButton = popupAvatar.querySelector(".popup__close");
 const avatarOpenButton = document.querySelector(".profile__avatar-overlay");
 const deleteCloseButton = popupDelete.querySelector(".popup__close");
-
+const popupImageCloseButton = popupImage.querySelector(".popup__close");
 //Подключаем обработчики на кнопки
+popupImageCloseButton.addEventListener("click", () => {
+  closePopup(popupImage);
+});
 deleteCloseButton.addEventListener("click", () => {
-closePopup(popupDelete);
+  closePopup(popupDelete);
 });
 avatarCloseButton.addEventListener("click", () => {
-closePopup(popupAvatar);
+  closePopup(popupAvatar);
 });
 avatarOpenButton.addEventListener("click", () => {
-openPopup(popupAvatar);
+  openPopup(popupAvatar);
 });
 profileEditOpenButton.addEventListener("click", () => {
-openPopup(popupProfile);
+  openPopup(popupProfile);
 });
 cardFormOpenButton.addEventListener("click", () => {
-openPopup(popupCard);
+  openPopup(popupCard);
 });
 profileCloseButton.addEventListener("click", () => {
-closePopup(popupProfile);
+  closePopup(popupProfile);
 });
 cardCloseButton.addEventListener("click", () => {
-closePopup(popupCard);
+  closePopup(popupCard);
 });
 //Кнопки сохранения формы
 popupProfile.addEventListener("submit", saveProfile);
@@ -53,7 +58,6 @@ popupDelete.addEventListener("submit", (e) => {
 enableValidation(settings);
 //загружаем данные профиля
 getDataProfile(settings);
-
 
 import "./pages/index.css";
 import { addCard, deleteCard, cardDelete } from "./components/card";
